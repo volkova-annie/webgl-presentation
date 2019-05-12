@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">  
+<head>
+  <meta charset="utf-8">
+  <title>The WebGL Graphics Pipeline</title>
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme"> 
+  <link rel="stylesheet" href="plugin/highlight/styles/docco.css"> 
+  <link rel="icon" type="image/png" href="img/WebGL.png">
+  <style>
+
+    .reveal .slide-number {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .reveal section img {
+      max-height: 400px;
+    }
+
+    .reveal pre {
+      box-shadow: none;
+    }
+
+    .reveal .me {
+      margin-top: 42px;
+    }
+
+    .reveal ul ul {
+      font-size: 0.8em;
+    }
+
+    #rasterization {
+      height: 300px;
+    }
+
+    .code {
+      background: #fff;
+      color: #1c1e20;
+    }
+
+    .code code {
+      font-size: 25px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section style="position: relative;">
+        <h1>WebGL Planet "Ellen"</h1>
+        <p>Brought to you by <a href="github.com/volkova-annie">Volkova Annie</a></p>
+        <figure>
+            <img style="border: none;
+            background: transparent;
+            box-shadow: none;" class="cover" src="img/planet.png" alt="Planet">
+        </figure>
+      </section>
+
+      <section>
+        <h2>Что такое WebGL?</h2>
+        <img src="img/asscreed.jpg">
+      </section>
+
+      <section>
+        <h2>CPU vs GPU</h2>
+        <img src="img/cpu-gpu.png">
+      </section>
+
+      <section>
+        <h2>Основные шаги</h2>
+        <ul>
+          <li>
+            Геометрия состояшая из треугольников
+          </li>
+          <li>Говорим видеокарте, какие преобразования нужно сделать над треугольниками</li>
+          <li>И расскрашиваем их</li>
+        </ul>
+        <img src="img/parallel.png">
+      </section>
+
+      <section>
+        <h2>Клиент-серверная модель</h2>
+        <ul>
+          <li>
+            JavaScript code - это клиент
+          </li>
+          <li>
+            Видеокарта - это сервер
+          </li>
+          <li>
+            JavaScript code отправляет запросы на видеокарту через интерфес WebGL
+            <ul>
+              <li>gl.bufferData(...)</li>
+              <li>gl.drawElements(...)</li>
+            </ul>
+          </li>
+        </ul>
+        
+        <p style="margin-top: 30px;">Array of vertex data</ style="margin-top: 20px;">
+          <pre>
+            <code class="javascript">
+        const vertecies = new Float32Array([
+            -0.5, -0.5, 0.0,  // Vertex 1   1.0, 0.0, 0.0 // Normal 1
+             0.5, -0.5, 0.0,  // Vertex 2   1.0, 0.0, 0.0 // Normal 2
+             0.0,  0.5, 0.0   // Vertex 3   1.0, 0.0, 0.0 // Normal 3
+          ]);
+          </code>
+          </pre>
+      </section>
+
+      <section>
+        <h2>Графический pipeline WebGL</h2>
+        <img src="img/pipeline.png">
+        <ul>
+            <li>Input Assembler </li>
+            <li>Vertex shader</li>
+            <li>Primitive Assembly</li>
+            <li>Rasterizer</li>
+            <li>Fragment Shader</li>
+            <li>Output Merger </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Программируемый этап</h2>
+        <div style="display: flex;">
+          <ul>
+            <li>Вершинный шейдер</li>
+            <li>Set gl_Position to tell WebGL the final vertex position</li>
+          </ul>
+          <img id="rasterization" src="img/ndc.png">
+        </div>
+        <pre>
+            <code class="c">
+    // attribute means it comes from the geometry
+    // array we created!
+    attribute vec4 aPosition;
+  
+    void main() {
+      gl_Position = aPosition;
+    }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Непрограммируемый этап</h2>
+        <ul>
+          <li>Растеризация</li>
+          <li>GPU figures out which pixels are covered by each triangle</li>
+          <li>Interpolates vertex data to pixels along triangle surface</li>
+        </ul>
+        <img src="img/rasterization.png">
+      </section>
+
+      <section>
+        <h2>Программируемый этап</h2>
+        <ul>
+          <li>Фрагментный шейдер</li>
+          <li>
+              Set gl_FragColor to tell WebGL the final color of a pixel
+          </li>
+        </ul>
+        <pre>
+            <code class="c">
+    void main() {
+      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>
+            WebGL 2d
+        </h2>
+        <img src="img/2d.png" alt="2d">
+      </section>
+
+      <!-- <section>
+        <h2>Even the longest journey begins with a single step...</h2>
+        <img src="img/tri.jpeg">
+      </section>
+
+      <section>
+        <h2>The basic idea...</h2>
+        <ul>
+          <li>
+            If we can draw triangles and color them, we can build Assassin's Creed
+            <ul>
+              <li>(At least the graphical part)</li>
+            </ul>
+          </li>
+        </ul>
+      </section> -->
+
+      <!-- <section>
+        <h2>Basic steps</h2>
+        <ul>
+          <li>Describe surface geometry in triangles</li>
+          <li>Tell the GPU how it should manipulate the triangles and color them</li>
+          <li>Draw</li>
+        </ul>
+      </section> -->
+
+      <!-- <section>
+        <h2>Client/Server Model</h2>
+        <ul>
+          <li>JavaScript code is the client</li>
+          <li>GPU is the server</li>
+          <li>
+            JavaScript code sends commands and data to the GPU via WebGL
+            <ul>
+              <li>gl.bufferData(...)</li>
+              <li>gl.drawArrays(...)</li>
+            </ul>
+          </li>
+        </ul>
+      </section> -->
+
+      <!-- <section>
+        <h2>State Machine</h2>
+        <ul>
+          <li>
+            WebGL commands set up state on the GPU
+            <ul>
+              E.g. Geometry, colors, etc.
+            </ul>
+          </li>
+          <li>That state is used in the next draw command.</li>
+        </ul>
+      </section> -->
+
+      <!-- <section>
+        <h2>State Machine</h2>
+        <img src="img/client-server.png">
+      </section>
+
+      <section>
+        <h2>Describe Geometry</h2>
+        <ul><li>Array of vertex data</li></ul>
+        <pre>
+            <code class="javascript">
+    var positions = new Float32Array([
+      -0.5, -0.5, 0.0,  // Vertex 1
+       0.5, -0.5, 0.0,  // Vertex 2
+       0.0,  0.5, 0.0   // Vertex 3
+    ]);
+          </code>
+        </pre>
+      </section> -->
+
+      <section>
+        <h2>Basic steps on the GPU</h2>
+        <ul>
+          <li>Move vertices around (vertex shader)</li>
+          <li>Map triangles to pixels on the screen (rasterization)</li>
+          <li>Color the pixels (fragment shader)</li>
+          <li>Display the scene</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2>The process</h2>
+        <img src="img/parallel.png">
+      </section>
+
+      <section>
+        <h2>Pipeline Components</h2>
+        <img src="img/pipeline.png">
+      </section>
+      
+      <section>
+        <h2>We control</h2>
+        <ul>
+          <li>Vertex shader</li>
+          <li>Set gl_Position to tell WebGL the final vertex position</li>
+        </ul>
+        <pre>
+          <code class="c">
+  // attribute means it comes from the geometry
+  // array we created!
+  attribute vec4 aPosition;
+
+  void main() {
+    gl_Position = aPosition;
+  }
+        </code>
+      </pre>
+      </section>
+
+      <section>
+        <h2>Normalized Device Coordinates</h2>
+        <ul>
+          <li>gl_Position is given in normalized device coordinates</li>
+        </ul>
+        <img id="rasterization" src="img/ndc.png">
+      </section>
+
+      <section>
+        <h2>We don't control</h2>
+        <ul>
+          <li>
+            Rasterization
+            <ul>
+              <li>GPU figures out which pixels are covered by each triangle</li>
+              <li>Interpolates vertex data to pixels along triangle surface</li>
+            </ul>
+          </li>
+        </ul>
+        <!-- Image by Martin Kraus http://en.wikibooks.org/wiki/GLSL_Programming/Rasterization#/media/File:Pixels_covered_by_a_triangle.png -->
+        <img src="img/rasterization.png">
+      </section>
+
+      <section>
+        <h2>We control</h2>
+        <ul>
+          <li>Fragment shader</li>
+          <li>Set gl_FragColor to tell WebGL the final color of a pixel</li>
+        </ul>
+        <pre>
+          <code class="c">
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+        </code>
+      </pre>
+      </section>
+      
+      <section>
+        <h2>Let's get started!</h2>
+      </section>
+
+      <section>
+        <h2>What we did</h2>
+        <ul>
+          <li>Shaders</li>
+          <li>Programs</li>
+          <li>Attributes</li>
+          <li>Array buffers</li>
+          <li>Varyings</li>
+          <li>Uniforms</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Shaders</h2>
+        <ul>
+          <li>Vertex shader moves each vertex to its final NDC position</li>
+          <li>Fragment shader colors a pixel covered by a triangle</li>
+        </ul>
+      </section>
+      
+      <section>
+        <h2>Programs</h2>
+        <ul>
+          <li>Combination of a vertex and a fragment shader</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Attributes</h2>
+        <ul>
+          <li>Per vertex data passed to vertex shader</li>
+          <li>Includes positions, colors, normals, texture coordinates, etc.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Array buffers</h2>
+        <ul>
+          <li>Storage location on GPU for vertex data</li>
+          <li>Data has to be passed from the program into an array buffer</li>
+          <li>Array buffer has to be bound to an attribute in the vertex shader</li>
+          <li>Pointer must be enabled to tell GPU how to traverse the array</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Varyings</h2>
+        <ul>
+          <li>Data passed from vertex to fragment shader</li>
+          <li>Output from vertex shader as per-vertex data</li>
+          <li>Interpolated across triangle surface in rasterization step</li>
+          <li>Interpolated values passed to fragment shader as per-pixel data</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Uniforms</h2>
+        <ul>
+          <li>Data passed from program to both vertex shader and fragment shader</li>
+          <li>Remains constant for all vertices/pixels of a given object</li>
+          <li>E.g. light position, camera position, time</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>That's pretty much it!</h2>
+        <ul>
+          <li>That pretty much all the API you need to know to draw with WebGL</li>
+          <li>
+            A couple of important ommissions:
+            <ul>
+              <li>Textures</li>
+              <li>Frame buffers</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Thanks!</h1>
+        <div class="credits">
+          <ul>
+            <li><a href="mailto:tarek@biodigital.com">tarek@biodigital.com</a></li>
+            <li><a target="_blank" href="https://twitter.com/thsherif">@thsherif</a></li>
+            <li><a target="_blank" href="https://www.biodigital.com">www.biodigital.com</a></li>
+          </ul>
+        </div>
+      </section>
+    
+    </div>
+  </div>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.min.js"></script>
+  <script src="js/highlight.min.js"></script>
+  <script>
+    Reveal.initialize({
+      history: true,
+      slideNumber: true,
+      controls: false
+    });
+
+    Reveal.addEventListener("slidechanged", function(event) {
+      window.onresize();
+    });
+
+    hljs.initHighlightingOnLoad();
+    
+  </script>
+</body>
+</html>

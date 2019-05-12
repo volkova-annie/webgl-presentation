@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <script type="shader/vertex" id="vs">
+        attribute vec4 position;
+        attribute vec4 color;
+
+        uniform float time;
+
+        varying vec4 vColor;
+
+        void main() {
+            mat2 rotation = mat2(
+                cos(time), sin(time),
+                -sin(time), cos(time)
+            );
+
+            vColor = color;
+            gl_Position = vec4(rotation * position.xy, 0.0, 1.0);
+        }
+    </script>
+    <script type="shader/fragment" id="fs">
+        precision highp float;
+
+        uniform float time;
+
+        varying vec4 vColor;
+
+        void main() {
+            gl_FragColor = vec4(
+                sin(vColor.r * 12.0 + time), 
+                cos(vColor.g * 6.0 + time), 
+                sin(vColor.b * 10.0 + time), 
+                1.0
+            );
+        }
+    </script>
+    <script>
+        var canvas = document.getElementById("webgl-canvas");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var gl = canvas.getContext("webgl");
+
+        gl.clearColor(0, 0, 0, 1);
+
+        var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+        var vertexShaderSource = document.getElementById("vs").text;
+        gl.shaderSource(vertexShader, vertexShaderSource);
+        gl.compileShader(vertexShader);
+
+        if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+            console.error(gl.getShaderInfoLog(vertexShader));
+        }
+
+        var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+        var fragmentShaderSource = document.getElementById("fs").text;
+        gl.shaderSource(fragmentShader, fragmentShaderSource);
+        gl.compileShader(fragmentShader);
+
+        if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+            console.error(gl.getShaderInfoLog(fragmentShader));
+        }
+
+        var program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error(gl.getProgramInfoLog(program));
+        }
+
+        var positionHandle = gl.getAttribLocation(program, "position");
+        var colorHandle = gl.getAttribLocation(program, "color");
+        var timeHandle = gl.getUniformLocation(program, "time");
+
+        gl.useProgram(program);
+
+        var positions = new Float32Array([
+            -0.5, -0.5, 0.0,
+            0.5, -0.5, 0.0,
+            0.0, 0.5, 0.0
+        ]);
+
+        var positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+        gl.vertexAttribPointer(positionHandle, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(positionHandle);
+
+        var colors = new Float32Array([
+            1, 0, 0,
+            0, 1, 0,
+            0, 0, 1
+        ]);
+
+        var colorBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
+        gl.vertexAttribPointer(colorHandle, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(colorHandle);
+
+        var startTime = Date.now();
+        (function draw() {
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.uniform1f(timeHandle, (Date.now() - startTime) / 1000.0);
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+            requestAnimationFrame(draw);
+        })();
+
+
+
+
+    </script>
+</body>
+</html>
