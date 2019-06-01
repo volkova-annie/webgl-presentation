@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">  
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>The WebGL Graphics Pipeline</title>
   <link rel="stylesheet" href="css/reveal.min.css">
-  <link rel="stylesheet" href="css/theme/default.css" id="theme"> 
-  <link rel="stylesheet" href="plugin/highlight/styles/docco.css"> 
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="plugin/highlight/styles/docco.css">
   <link rel="icon" type="image/png" href="img/WebGL.png">
   <style>
 
@@ -51,34 +51,92 @@
     <div class="slides">
       <section style="position: relative;">
         <h1>WebGL Planet "Ellen"</h1>
-        <p>Brought to you by <a href="github.com/volkova-annie">Volkova Annie</a></p>
         <figure>
             <img style="border: none;
             background: transparent;
             box-shadow: none;" class="cover" src="img/planet.png" alt="Planet">
         </figure>
+        <p>Brought to you by <a href="https://github.com/volkova-annie">Volkova Annie</a></p>
       </section>
 
       <section>
         <h2>Что такое WebGL?</h2>
-        <img src="img/asscreed.jpg">
+        <p> — это рафическое API, которое позволяет отправлять команды на видеокарту из JavaScript</p>
       </section>
 
       <section>
-        <h2>CPU vs GPU</h2>
-        <img src="img/cpu-gpu.png">
+        <h2>Khronos Group Members</h2>
+        <img class="img-members" src="img/webgl-members.png">
+        <style>
+          section img.img-members {
+            max-height: 600px;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+          }
+        </style>
+      </section>
+
+      <section>
+        <header class="cpu-gpu-header"><h2>CPU</h2><h3>vs</h3><h2>GPU</h2></header>
+        <ul class="cpu-gpu-list">
+          <li>Устройство видеокарты позволяет выполнять в десятки тысяч раз большее количество задач параллельно.</li>
+          <li>В процессоре 8 ядер, а в видеокарту можно представить как процессор с несколькими сотнями.</li>
+          <li>На CPU только 2 потока на одном ядре, а на видеокарте около 40 потоков на одном ядре.</li>
+        </ul>
+        <img src="img/cpu-gpu.png" class="cpu-gpu">
+
+        <style>
+          header.cpu-gpu-header {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+          }
+          header.cpu-gpu-header h3 {
+            margin-left: 15px;
+            margin-right: 15px;
+          }
+          ul.cpu-gpu-list {
+            margin-top: 0;
+          }
+          ul.cpu-gpu-list li {
+            font-size: 32px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+          }
+          section img.cpu-gpu {
+            margin-top: 20px;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+          }
+        </style>
       </section>
 
       <section>
         <h2>Основные шаги</h2>
-        <ul>
+        <ul class="steps-list">
           <li>
             Геометрия состояшая из треугольников
           </li>
           <li>Говорим видеокарте, какие преобразования нужно сделать над треугольниками</li>
           <li>И расскрашиваем их</li>
         </ul>
-        <img src="img/parallel.png">
+        <img class="steps" src="img/steps.png">
+
+        <style>
+          section img.steps {
+            margin-top: 80px;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+          }
+          ul.steps-list li {
+            font-size: 32px;
+            margin-bottom: 1px;
+            line-height: 1.2;
+          }
+        </style>
       </section>
 
       <section>
@@ -98,8 +156,8 @@
             </ul>
           </li>
         </ul>
-        
-        <p style="margin-top: 30px;">Array of vertex data</ style="margin-top: 20px;">
+
+        <p style="margin-top: 30px;">Array of vertex data</p>
           <pre>
             <code class="javascript">
         const vertecies = new Float32Array([
@@ -113,7 +171,8 @@
 
       <section>
         <h2>Графический pipeline WebGL</h2>
-        <img src="img/pipeline.png">
+<!--        <img src="img/process2.jpg">-->
+        <img src="img/process1.jpg">
         <ul>
             <li>Input Assembler </li>
             <li>Vertex shader</li>
@@ -131,14 +190,14 @@
             <li>Вершинный шейдер</li>
             <li>Set gl_Position to tell WebGL the final vertex position</li>
           </ul>
-          <img id="rasterization" src="img/ndc.png">
+          <img id="" src="img/ndc.png">
         </div>
         <pre>
             <code class="c">
     // attribute means it comes from the geometry
     // array we created!
     attribute vec4 aPosition;
-  
+
     void main() {
       gl_Position = aPosition;
     }
@@ -177,7 +236,81 @@
         <h2>
             WebGL 2d
         </h2>
-        <img src="img/2d.png" alt="2d">
+        <img class="flat-view" src="img/2d.png" alt="2d-view">
+        <style>
+          section img.flat-view {
+            border: none;
+            max-height: 600px;
+          }
+        </style>
+      </section>
+
+      <section>
+        <h2>3D</h2>
+        <img class="planet-view" src="img/planet.png" alt="3d-view">
+        <style>
+          section img.planet-view {
+            border: none;
+            max-height: 600px;
+          }
+        </style>
+      </section>
+
+      <section>
+        <h2>Проекция</h2>
+        <img class="projection" src="img/projection.png" alt="projection">
+
+        <style>
+          section img.projection {
+            background-color: #ffffff;
+          }
+        </style>
+      </section>
+
+      <section>
+        <h2>Four Ways to Create a Mesh for a Sphere</h2>
+        <img src="img/spheres.png" alt="spheres">
+        <a href="https://medium.com/game-dev-daily/four-ways-to-create-a-mesh-for-a-sphere-d7956b825db4" style="display: block;">
+          Four Ways to Create a Mesh for a Sphere
+        </a>
+      </section>
+
+      <section>
+        <h2>Noise</h2>
+        <img src="img/noise.jpg" alt="noise">
+      </section>
+
+      <section>
+        <video class="title-video" src="videos/planet.mp4" autoplay></video>
+        <style>
+          video.title-video {
+            margin-top: -20px;
+          }
+        </style>
+      </section>
+
+      <section>
+        <h2>Освещение</h2>
+      </section>
+
+      <section>
+        <h2>Сглаживание</h2>
+        <div>
+          <img src="img/fxaa-before.jpg" alt="fxaa-before">
+          <img src="img/fxaa-after.jpg" alt="fxaa-after">
+        </div>
+      </section>
+
+      <section>
+        <h2>Выводы</h2>
+      </section>
+
+      <section>
+        <h2>Литература</h2>
+      </section>
+
+      <section>
+        <h2>Спасибо :)</h2>
       </section>
 
       <!-- <section>
@@ -262,7 +395,7 @@
           <li>Display the scene</li>
         </ul>
       </section>
-      
+
       <section>
         <h2>The process</h2>
         <img src="img/parallel.png">
@@ -272,7 +405,7 @@
         <h2>Pipeline Components</h2>
         <img src="img/pipeline.png">
       </section>
-      
+
       <section>
         <h2>We control</h2>
         <ul>
@@ -329,7 +462,7 @@
         </code>
       </pre>
       </section>
-      
+
       <section>
         <h2>Let's get started!</h2>
       </section>
@@ -353,7 +486,7 @@
           <li>Fragment shader colors a pixel covered by a triangle</li>
         </ul>
       </section>
-      
+
       <section>
         <h2>Programs</h2>
         <ul>
@@ -422,7 +555,7 @@
           </ul>
         </div>
       </section>
-    
+
     </div>
   </div>
   <script src="lib/js/head.min.js"></script>
@@ -440,7 +573,7 @@
     });
 
     hljs.initHighlightingOnLoad();
-    
+
   </script>
 </body>
 </html>
