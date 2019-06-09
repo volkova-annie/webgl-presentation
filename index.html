@@ -61,7 +61,7 @@
 
       <section>
         <h2>Что такое WebGL?</h2>
-        <p> — это рафическое API, которое позволяет отправлять команды на видеокарту из JavaScript</p>
+        <p> — это графическое API, которое позволяет отправлять команды на видеокарту из JavaScript</p>
       </section>
 
       <section>
@@ -157,14 +157,20 @@
           </li>
         </ul>
 
-        <p style="margin-top: 30px;">Array of vertex data</p>
-          <pre>
-            <code class="javascript">
-        const vertecies = new Float32Array([
-            -0.5, -0.5, 0.0,  // Vertex 1   1.0, 0.0, 0.0 // Normal 1
-             0.5, -0.5, 0.0,  // Vertex 2   1.0, 0.0, 0.0 // Normal 2
-             0.0,  0.5, 0.0   // Vertex 3   1.0, 0.0, 0.0 // Normal 3
-          ]);
+        <p style="margin-top: 10px;">Вершинный буффер</p>
+          <pre style="margin-top: 0;">
+            <code class="javascript" style="line-height: 1; padding: 0;">
+        const vertices = new Float32Array([
+          // vertex 1
+         -0.5, -0.5, 0.0,  // position   
+          1.0, 0.0, 0.0,   // normal
+          0.5, 0.5,        // texCoord 
+          ...
+          // vertex n
+          1.0, 0.5, 0.0,  // position
+          0.0, 1.0, 0.0,  // normal
+          1.0, 0.5,       // texCoord
+       ]);
           </code>
           </pre>
       </section>
