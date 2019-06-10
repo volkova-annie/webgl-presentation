@@ -50,7 +50,7 @@
   <div class="reveal">
     <div class="slides">
       <section style="position: relative;">
-        <h1>WebGL Planet "Ellen"</h1>
+        <h1>WebGL Planet</h1>
         <figure>
             <img style="border: none;
             background: transparent;
@@ -66,7 +66,7 @@
 
       <section>
         <h2>Khronos Group Members</h2>
-        <img class="img-members" src="img/webgl-members.jpg">
+        <img class="img-members" src="img/members.jpeg">
         <style>
           section img.img-members {
             max-height: 600px;
@@ -80,13 +80,16 @@
       <section>
         <header class="cpu-gpu-header"><h2>CPU</h2><h3>vs</h3><h2>GPU</h2></header>
         <ul class="cpu-gpu-list">
-          <li>Устройство видеокарты позволяет выполнять в десятки тысяч раз большее количество задач параллельно.</li>
-          <li>В процессоре 8 ядер, а в видеокарту можно представить как процессор с несколькими сотнями.</li>
-          <li>На CPU только 2 потока на одном ядре, а на видеокарте около 40 потоков на одном ядре.</li>
+          <li>Процессор Core i7, 2,7гГц - 4 ядра, видеокарта Radeon Pro 450 - 640 ядер</li>
+          <!-- <li>На CPU может параллельно выполняться 4 потока, а на видеокарте 640 потоков</li> -->
+          <li>Видеокарта заточена на параллельное выполнение несвязанных между собой задач</li>
+          <!-- <li>На CPU только 2 потока на одном ядре, а на видеокарте около 40 потоков на одном ядре.</li> -->
         </ul>
-        <img src="img/cpu-gpu.png" class="cpu-gpu">
+        <img src="img/cpu-gpu.gif" class="cpu-gpu">
 
         <style>
+
+          
           header.cpu-gpu-header {
             display: flex;
             justify-content: center;
@@ -190,77 +193,130 @@
       </section>
 
       <section>
-        <h2>Вершинный шейдер - <h3>(программируемый этап)</h3></h2>
+        <img src="img/pipeline-step2.png" alt="">
+      </section>
+
+      <section>
+        <h2>Вершинный шейдер</h2>
+           <!-- - <h3>(программируемый этап)</h3> -->
         <div style="display: flex;">
           <ul>
-            <li>Set gl_Position to tell WebGL the final vertex position</li>
+            <li>Данные, которые описывают вершину</li>
+            <li>На выходе вершинный шейдер возвращает позицию вершины в gl_Position</li>
           </ul>
-          <img id="" src="img/ndc.png">
+          <!-- <img id="" src="img/ndc.png"> -->
         </div>
         <pre>
             <code class="c">
-    // attribute means it comes from the geometry
-    // array we created!
-    attribute vec4 aPosition;
+    // attribute means it comes from the geometry array we created
+    attribute vec3 a_position;
+    attribute vec3 a_normal;
+    // uniforms - constants
+    uniform mat4 u_worldTransform;
+    uniform mat4 u_viewProjection;
+    // output to fragment shader
+    varying vec3 v_normal;
 
     void main() {
-      gl_Position = aPosition;
+      vec4 worldPos = u_worldTransform * vec4(a_position, 1.0);
+      vec4 viewPos = u_viewProjection * worldPos;
+
+      v_normal = mat3(u_worldTransform) * a_normal;
+      gl_Position = viewPos;
     }
           </code>
         </pre>
       </section>
 
       <section>
-        <h2>Растеризация - <h3>(непрограммируемый этап)</h3></h2>
+          <h2>Вершинный шейдер</h2>
+          <img src="img/ndc.png" width="475" style="max-height: 500px">
+
+      </section>
+
+      <section>
+        <h2>Растеризация
+           <!-- - <h3>(непрограммируемый этап)</h3> -->
+          </h2>
         <ul>
-          <li>GPU figures out which pixels are covered by each triangle</li>
-          <li>Interpolates vertex data to pixels along triangle surface</li>
+          <li>Видеокарта определяет, какие пиксели в итоговом Frame buffer перекрываются рисуемым примитивом</li>
+          <li>Интерполяция данных вершин внутри треугольника</li>
+          <!-- <li>Interpolates vertex data to pixels along triangle surface</li> -->
         </ul>
         <img src="img/rasterization.png">
       </section>
 
       <section>
-        <h2>Фрагментный шейдер - <h3>(программируемый этап)</h3></h2>
+        <h2>Фрагментный шейдер
+           <!-- - <h3>(программируемый этап)</h3> -->
+        </h2>
         <ul>
           <li>
-              Set gl_FragColor to tell WebGL the final color of a pixel
+            Для каждого фрагмента, полученного из Rasterizer мы выполняем один фрагментый shader
           </li>
+          <li>
+            На выходе фрагментый шейдер нам дает цвет итогового фрагмента
+          </li>
+              <!-- Set gl_FragColor to tell WebGL the final color of a pixel -->
         </ul>
         <pre>
             <code class="c">
+    // uniforms
+    uniform vec3 u_lightDir;
+    uniform vec3 u_lightColor;
+    //input from vertex shader
+    varying vec3 v_normal;
+    
     void main() {
-      gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      float NoL = max(dot(v_normal, -u_lightDir), 0.0);
+      gl_FragColor = vec4(NoL * u_lightColor, 1.0);
     }
           </code>
         </pre>
       </section>
 
-      <section>
+      <section class="section-gif">
         <h2>
             WebGL 2d
         </h2>
-        <img class="flat-view" src="img/2d.png" alt="2d-view">
+        <img src="videos/2d.gif" class="image-gif" alt="2d-gif">
         <style>
-          section img.flat-view {
+          /* section img.flat-view {
             border: none;
             max-height: 600px;
-          }
+          } */
         </style>
       </section>
 
-      <section>
-        <h2>3D</h2>
+      <section class="section-planer-view">
+        <h2>WebGL 3D</h2>
         <img class="planet-view" src="img/planet.png" alt="3d-view">
         <style>
-          section img.planet-view {
+          /* section img.section-planer-view {
             border: none;
             max-height: 600px;
+          } */
+          section.section-planer-view.present {
+            top: -56% !important;
+            left: -500px;
+            width: auto;
           }
+
+          section img.planet-view {
+            border: none;
+            max-height: 660px;
+            min-width: 1000px;
+            margin-bottom: auto;
+          } 
         </style>
       </section>
 
       <section>
         <h2>Проекция</h2>
+        <ul>
+          <li>Ортогональная - линии проецирования переносятся перпендикулярно плоскости проекции</li>
+          <li>Перспективная - луч проекции идет от проецируемой точки в позицию камеры</li>
+        </ul>
         <img class="projection" src="img/projection.png" alt="projection">
 
         <style>
@@ -272,28 +328,75 @@
 
       <section>
         <h2>Four Ways to Create a Mesh for a Sphere</h2>
-        <img src="img/spheres.png" alt="spheres">
-        <a href="https://medium.com/game-dev-daily/four-ways-to-create-a-mesh-for-a-sphere-d7956b825db4" style="display: block;">
+        <img src="img/spheres.png" alt="spheres" style="max-height: 500px">
+        <!-- <a href="https://medium.com/game-dev-daily/four-ways-to-create-a-mesh-for-a-sphere-d7956b825db4" style="display: block;">
           Four Ways to Create a Mesh for a Sphere
-        </a>
+        </a> -->
       </section>
 
       <section>
         <h2>Noise</h2>
         <img src="img/noise.jpg" alt="noise">
+        <pre>
+          <code>
+              elevation[y][x] =    1 * noise(1 * nx, 1 * ny);
+              +  0.5 * noise(2 * nx, 2 * ny);
+              + 0.25 * noise(4 * nx, 2 * ny);
+          </code>
+        </pre>
       </section>
 
       <section>
-        <video class="title-video" src="videos/planet.mp4" autoplay></video>
+          <h2>Noise</h2>
+          <img src="img/noise-3d.png" alt="noise" style="max-height: 700px;width: 800px;">
+      </section>
+
+      <section class="section-gif">
+        <h2>
+          Planet
+        </h2>
+        <img src="videos/planet.gif" class="image-gif" alt="planet-gif">
         <style>
-          video.title-video {
-            margin-top: -20px;
+          section.section-gif.present {
+            top: -56% !important;
+            left: -550px;
+            width: auto;
           }
+
+          section img.image-gif {
+            border: none;
+            max-height: 700px;
+            min-width: 1100px;
+            margin-bottom: auto;
+          } 
         </style>
       </section>
 
       <section>
         <h2>Освещение</h2>
+        <img src="img/light.gif" alt="">
+      </section>
+
+      <section>
+        <h2>FXAA - fast approximate anti-aliasing</h2>
+        <div class="fxaa-wrapper">
+          <img class="fxaa-img" src="img/fxaa2.png" alt="fxaa-before">
+          <img class="fxaa-img" src="img/fxaa1.png" alt="fxaa-after">
+        </div>
+
+        <style>
+        section .fxaa-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 100px;
+        }
+        section .fxaa-wrapper img.fxaa-img {
+          height: auto;
+          width: 49%;
+          border: none;
+        }
+        </style>
       </section>
 
       <section>
