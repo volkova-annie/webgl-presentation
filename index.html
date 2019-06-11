@@ -180,21 +180,57 @@
 
       <section>
         <h2>Графический pipeline WebGL</h2>
-<!--        <img src="img/process2.jpg">-->
-        <img src="img/process1.jpg">
-        <ul>
-            <li>Input Assembler </li>
+        <ul class="pipeline-list">
+            <li>Input Assembly</li>
             <li>Vertex shader</li>
             <li>Primitive Assembly</li>
             <li>Rasterizer</li>
             <li>Fragment Shader</li>
-            <li>Output Merger </li>
+            <li>Test and Blending</li>
         </ul>
+        <img src="img/pipeline.gif" class="pipeline-img all" style="min-height: 400px;">
+        <style>
+          section ul.pipeline-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px 10%;
+          }
+          section ul.pipeline-list li {
+            width: 50%;
+          }
+          section img.pipeline-img {
+            background-color: #ffffff;
+            border-color: #ffffff;
+            min-height: 500px;
+          }
+
+        </style>
       </section>
 
       <section>
-        <img src="img/pipeline-step2.png" alt="">
+        <h2>Vertex shader</h2>
+        <img src="img/pipeline-step2.gif" alt="" class="pipeline-img">
       </section>
+
+      <section>
+          <h2>Primitive Assembly</h2>
+          <img src="img/pipeline-step3.gif" alt="" class="pipeline-img">
+        </section>
+
+      <section>
+          <h2>Rasterizer</h2>
+          <img src="img/pipeline-step4.gif" alt="" class="pipeline-img">
+        </section>
+
+      <section>
+          <h2>Fragment Shader</h2>
+          <img src="img/pipeline-step5.gif" alt="" class="pipeline-img">
+        </section>
+
+      <section>
+          <h2>Test and Blending + Output Buffer</h2>
+          <img src="img/pipeline-step6.gif" alt="" class="pipeline-img">
+        </section>
 
       <section>
         <h2>Вершинный шейдер</h2>
@@ -273,6 +309,10 @@
     }
           </code>
         </pre>
+      </section>
+
+      <section>
+        <h2>Let's get started!</h2>
       </section>
 
       <section class="section-gif">
@@ -373,8 +413,43 @@
       </section>
 
       <section>
-        <h2>Освещение</h2>
-        <img src="img/light.gif" alt="">
+        <h2>Освещение по Фонгу</h2>
+        <img src="img/phong-sum.png" alt="">
+        <div><i style="position: relative">
+          I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
+          +  k<sub>d</sub>(<span class="with-arrow">L</span>.<span class="with-arrow">N</span>) i<sub>d</sub> 
+          + k<sub>s</sub>(<span class="with-arrow">R</span>.<span class="with-arrow">V</span>)<sup>α</sup>        i<sub>s</sub>
+        </i>
+      </div>
+
+      <style>
+        .with-arrow {
+          position: relative;
+        }
+        .with-arrow::before {
+          content: '→';
+          position: absolute;
+          top: -20px;
+          left: 20%;
+          font-size: 60%;
+        }
+        .reveal i sup {
+          font-size: 60%;
+          position: absolute;
+          top: -22px;
+        }
+
+        .reveal i sub {
+          font-size: 60%;
+        }
+
+      </style>
+       
+     </section>
+
+      <section>
+          <h2>Освещение</h2>
+          <img src="img/light.gif" alt="">
       </section>
 
       <section>
