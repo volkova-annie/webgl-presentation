@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/reveal.min.css">
   <link rel="stylesheet" href="css/theme/default.css" id="theme">
   <link rel="stylesheet" href="plugin/highlight/styles/docco.css">
-  <link rel="icon" type="image/png" href="img/WebGL.png">
+  <!-- <link rel="icon" type="image/png" href="img/WebGL.png"> -->
   <style>
 
     .reveal .slide-number {
@@ -81,14 +81,13 @@
         <header class="cpu-gpu-header"><h2>CPU</h2><h3>vs</h3><h2>GPU</h2></header>
         <ul class="cpu-gpu-list">
           <li>
-            Процессор Core i7, 2,7гГц - 4 ядра, видеокарта Radeon Pro 450 - 640 ядер
+            Процессор Core i7, 2,7ГГц - 4 ядра, видеокарта Radeon Pro 450 - 640 ядер
           </li>
           <li>
             Видеокарта заточена на параллельное выполнение несвязанных между собой задач
           </li>
         </ul>
         <img src="img/cpu-gpu.gif" class="cpu-gpu">
-
         <style>
           header.cpu-gpu-header {
             display: flex;
@@ -130,7 +129,6 @@
           </li>
         </ul>
         <img class="steps" src="img/steps.png">
-
         <style>
           section img.steps {
             margin-top: 80px;
@@ -162,7 +160,8 @@
                 gl.bufferData(...)
               </li>
               <li>
-                gl.drawElements(...)
+                gl.drawElements(...) и gl.drawArrays(...)
+              </li>
               </li>
             </ul>
           </li>
@@ -232,32 +231,7 @@
       </section>
 
       <section>
-        <span><h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2></span>
-        <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
-      </section>
-
-      <section>
-          <h2>Primitive Assembly</h2>
-          <img src="img/pipeline-step3.gif" alt="" class="pipeline-img">
-        </section>
-
-      <section>
-          <h2>Rasterizer</h2>
-          <img src="img/pipeline-step4.gif" alt="" class="pipeline-img">
-        </section>
-
-      <section>
-          <h2>Fragment Shader</h2>
-          <img src="img/pipeline-step5.gif" alt="" class="pipeline-img">
-        </section>
-
-      <section>
-          <h2>Test and Blending + Output Buffer</h2>
-          <img src="img/pipeline-step6.gif" alt="" class="pipeline-img">
-        </section>
-
-      <section>
-        <h2>Вершинный шейдер</h2>
+        <h2>Vertex shader</h2>
         <div style="display: flex;">
           <ul>
             <li>
@@ -269,41 +243,54 @@
           </ul>
         </div>
         <pre>
-            <code class="c">
-    // attribute means it comes from the geometry array we created
-    attribute vec3 a_position;
-    attribute vec3 a_normal;
-    // uniforms - constants
-    uniform mat4 u_worldTransform;
-    uniform mat4 u_viewProjection;
-    // output to fragment shader
-    varying vec3 v_normal;
-
-    void main() {
-      vec4 worldPos = u_worldTransform * vec4(a_position, 1.0);
-      vec4 viewPos = u_viewProjection * worldPos;
-
-      v_normal = mat3(u_worldTransform) * a_normal;
-      gl_Position = viewPos;
-    }
+          <code class="c">
+      // attribute means it comes from the geometry array we created
+      attribute vec3 a_position;
+      attribute vec3 a_normal;
+      // uniforms - constants
+      uniform mat4 u_worldTransform;
+      uniform mat4 u_viewProjection;
+      // output to fragment shader
+      varying vec3 v_normal;
+  
+      void main() {
+        vec4 worldPos = u_worldTransform * vec4(a_position, 1.0);
+        vec4 viewPos = u_viewProjection * worldPos;
+  
+        v_normal = mat3(u_worldTransform) * a_normal;
+        gl_Position = viewPos;
+      }
           </code>
         </pre>
       </section>
 
       <section>
-          <h2>NORMALIZED DEVICE COORDINATES</h2>
-          <ul>
-            <li>
-              gl_Position задается в нормализованном координатном пространстве
-            </li>
-          </ul>
-          <img src="img/ndc.png" width="475" style="max-height: 500px">
-
+          <span><h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2></span>
+          <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
+        </section>
+  
+      <section>
+        <h2 style="text-transform: none;">gl_Position</h2>
+        <ul>
+          <li>
+            gl_Position - значение координат пространства отсечения
+          </li>
+        </ul>
+        <img src="img/ndc.png" width="475" style="max-height: 500px">
       </section>
 
       <section>
-        <h2>Растеризация
-          </h2>
+        <h2>Primitive Assembly</h2>
+        <img src="img/pipeline-step3.gif" alt="" class="pipeline-img">
+      </section>
+
+      <section>
+        <h2>Rasterizer</h2>
+        <img src="img/pipeline-step4.gif" alt="" class="pipeline-img">
+      </section>
+
+      <section>
+        <h2>Rasterizer</h2>
         <ul>
           <li>
             Видеокарта определяет, какие пиксели в итоговом Frame buffer перекрываются рисуемым примитивом
@@ -316,74 +303,81 @@
       </section>
 
       <section>
-        <h2>Фрагментный шейдер
+        <h2>Fragment Shader</h2>
+        <img src="img/pipeline-step5.gif" alt="" class="pipeline-img">
+      </section>
+
+      <section>
+        <h2>
+          Fragment Shader
         </h2>
         <ul>
           <li>
-            Для каждого фрагмента, полученного из Rasterizer мы выполняем один фрагментый shader
+            Для каждого фрагмента, полученного из Rasterizer мы выполняем один Fragment shader
           </li>
           <li>
-            На выходе фрагментый шейдер нам дает цвет итогового фрагмента
+            На выходе Fragment shader дает цвет итогового фрагмента
           </li>
         </ul>
         <pre>
-            <code class="c">
-    // uniforms
-    uniform vec3 u_lightDir;
-    uniform vec3 u_lightColor;
-    //input from vertex shader
-    varying vec3 v_normal;
-    
-    void main() {
-      float NoL = max(dot(v_normal, -u_lightDir), 0.0);
-      gl_FragColor = vec4(NoL * u_lightColor, 1.0);
-    }
+          <code class="c">
+      // uniforms
+      uniform vec3 u_lightDir;
+      uniform vec3 u_lightColor;
+      //input from vertex shader
+      varying vec3 v_normal;
+      
+      void main() {
+        float NoL = max(dot(v_normal, -u_lightDir), 0.0);
+        gl_FragColor = vec4(NoL * u_lightColor, 1.0);
+      }
           </code>
         </pre>
       </section>
 
       <section>
-          <h2>Uniforms</h2>
-          <ul>
-              <li>
-                Данные передаются из программы в вершинный и во фрагментный шейдер
-              </li>
-              <li>
-                Являются константой для всех вершин / пикселей данного объекта
-              </li>
-              <Li>
-                В них могут храниться положение света, положение камеры, время и т.д.
-              </li>
-          </ul>
-        </section>
-
-      <section>
-        <h2>Let's get started!</h2>
+        <h2>Uniforms</h2>
+        <ul>
+          <li>
+            Данные передаются из программы в вершинный и во фрагментный шейдер
+          </li>
+          <li>
+            Являются константой для всех вершин / пикселей данного объекта
+          </li>
+          <Li>
+            В них могут храниться положение света, положение камеры, время и т.д.
+          </li>
+        </ul>
       </section>
 
       <section>
-          <h2>Что у нас есть?</h2>
-          <ul>
-            <li>
-              Shaders
-            </li>
-            <li>
-              Programs
-            </li>
-            <li>
-              Attributes
-            </li>
-            <li>
-              Array buffers
-            </li>
-            <li>
-              Varyings
-            </li>
-            <li>
-              Uniforms
-            </li>
-          </ul>
-        </section>
+        <h2>Test and Blending + Output Buffer</h2>
+        <img src="img/pipeline-step6.gif" alt="" class="pipeline-img">
+      </section>
+
+      <section>
+        <h2>Что у нас есть?</h2>
+        <ul>
+          <li>
+            Shaders
+          </li>
+          <li>
+            Programs
+          </li>
+          <li>
+            Attributes
+          </li>
+          <li>
+            Array buffers
+          </li>
+          <li>
+            Varyings
+          </li>
+          <li>
+            Uniforms
+          </li>
+        </ul>
+      </section>
 
       <section class="section-gif">
         <h2>
@@ -434,8 +428,8 @@
       </section>
 
       <section>
-          <h2>Генерация карты высот</h2>
-          <img src="img/noise-3d.png" alt="noise" style="max-height: 700px;width: 800px;">
+        <h2>Генерация карты высот</h2>
+        <img src="img/noise-3d.png" alt="noise" style="max-height: 700px;width: 800px;">
       </section>
 
       <section>
@@ -471,7 +465,7 @@
       </section>
 
       <section>
-        <h2>AlphaBlend</h2>
+        <h2>AlphaBlend для облаков</h2>
         <pre>
             <code class="javascript"  style="line-height: 1.5;">
         gl.enable(gl.BLEND);
@@ -493,45 +487,63 @@
           + k<sub>s</sub> (<span class="with-arrow">R</span> . <span class="with-arrow">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
           </i>
         </div>
-      <style>
-        .with-arrow {
-          position: relative;
-        }
-        .with-arrow::before {
-          content: '→';
-          position: absolute;
-          top: -20px;
-          left: 20%;
-          font-size: 60%;
-        }
-        .reveal i sup {
-          font-size: 60%;
-          position: absolute;
-          top: -22px;
-        }
-        .reveal i sub {
-          font-size: 60%;
-        }
-        section div.formula {
-          padding: 20px;
-          width: 600px;
-          border: 4px solid;
-          margin: 30px auto;
-        }
-      </style>
-       
-     </section>
+        <style>
+          .with-arrow {
+            position: relative;
+          }
+          .with-arrow::before {
+            content: '→';
+            position: absolute;
+            top: -20px;
+            left: 20%;
+            font-size: 60%;
+          }
+          .reveal i sup {
+            font-size: 60%;
+            position: absolute;
+            top: -22px;
+          }
+          .reveal i sub {
+            font-size: 60%;
+          }
+          section div.formula {
+            padding: 20px;
+            width: 600px;
+            border: 4px solid;
+            margin: 30px auto;
+          }
+        </style>
+      </section>
 
       <section>
-          <h2>Освещение</h2>
-          <img src="img/light.gif" alt="">
-          <div class="formula">
-            <i style="position: relative">
-              I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
-              +  k<sub>d</sub> (<span class="with-arrow">L</span> . <span class="with-arrow">N</span>) i<sub>d</sub> 
-              + k<sub>s</sub> (<span class="with-arrow">R</span> . <span class="with-arrow">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
-            </i>
-          </div>
+        <h2>Освещение</h2>
+        <img src="img/light.gif" alt="">
+        <div class="formula">
+          <i style="position: relative">
+            I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
+            +  k<sub>d</sub> (<span class="with-arrow" style="color: #8E37D3">L</span> . <span class="with-arrow" style="color: #FF0000;">N</span>) i<sub>d</sub> 
+            + k<sub>s</sub> (<span class="with-arrow" style="color: #2765DD;">R</span> . <span class="with-arrow" style="color: #24B24C;">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
+          </i>
+        </div>
+      </section>
+
+      <section>
+        <h2>Aliasing</h2>
+        <div class="aliasing-container">
+          <img class="aliasing-img" src="img/aliasing-1.png" alt="fxaa-before">
+          <img class="aliasing-img" src="img/aliasing-2.png" alt="fxaa-after">
+        </div>
+        <style>
+          section .aliasing-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          }
+          section img.aliasing-img {
+            width: 600px;
+            height: 260px;
+          }
+        </style>
       </section>
 
       <section>
@@ -543,7 +555,6 @@
         <div class="formula">
             L = 0,299 * R + 0,587 * G + 0,114 * B 
         </div>
-
         <style>
         section .fxaa-wrapper {
           display: flex;
@@ -557,14 +568,6 @@
           border: none;
         }
         </style>
-      </section>
-
-      <section>
-        <h2>Сглаживание</h2>
-        <div>
-          <img src="img/fxaa-before.jpg" alt="fxaa-before">
-          <img src="img/fxaa-after.jpg" alt="fxaa-after">
-        </div>
       </section>
 
       <section>
@@ -606,10 +609,10 @@
             </a>
           </li>
           <li>
-              <a href="https://github.com/volkova-annie/drawing-board">
-                Приложение с моей планетой
-              </a>
-            </li>
+            <a href="https://github.com/volkova-annie/drawing-board">
+              Приложение с моей планетой
+            </a>
+          </li>
         </ul>
       </section>
 
