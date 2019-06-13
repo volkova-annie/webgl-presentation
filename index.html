@@ -6,43 +6,165 @@
   <link rel="stylesheet" href="css/reveal.min.css">
   <link rel="stylesheet" href="css/theme/default.css" id="theme">
   <link rel="stylesheet" href="plugin/highlight/styles/docco.css">
-  <!-- <link rel="icon" type="image/png" href="img/WebGL.png"> -->
   <style>
-
     .reveal .slide-number {
       font-size: 24px;
       font-weight: bold;
     }
-
     .reveal section img {
       max-height: 400px;
     }
-
     .reveal pre {
       box-shadow: none;
     }
-
     .reveal .me {
       margin-top: 42px;
     }
-
     .reveal ul ul {
       font-size: 0.8em;
     }
-
     #rasterization {
       height: 300px;
     }
-
     .code {
       background: #fff;
       color: #1c1e20;
     }
-
     .code code {
       font-size: 25px;
     }
 
+    section img.img-members {
+      max-height: 600px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    header.cpu-gpu-header {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+    }
+    header.cpu-gpu-header h3 {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+    ul.cpu-gpu-list {
+      margin-top: 0;
+    }
+    ul.cpu-gpu-list li {
+      font-size: 32px;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    section img.cpu-gpu {
+      margin-top: 20px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    section img.steps {
+      margin-top: 80px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+    ul.steps-list li {
+      font-size: 32px;
+      margin-bottom: 1px;
+      line-height: 1.2;
+    }
+
+    section ul.pipeline-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 30px 10%;
+    }
+    section ul.pipeline-list li {
+      width: 50%;
+    }
+    section img.pipeline-img {
+      background-color: #ffffff;
+      border-color: #ffffff;
+      min-height: 500px;
+    }
+
+    section.section-planer-view.present {
+      top: -56% !important;
+      left: -500px;
+      width: auto;
+    }
+    section img.planet-view {
+      border: none;
+      max-height: 660px;
+      min-width: 1000px;
+      margin-bottom: auto;
+    } 
+
+    section img.projection {
+      background-color: #ffffff;
+    }
+    
+    section.section-gif.present {
+      top: -56% !important;
+      left: -550px;
+      width: auto;
+    }
+    section img.image-gif {
+      border: none;
+      max-height: 700px;
+      min-width: 1100px;
+      margin-bottom: auto;
+    } 
+    
+    .with-arrow {
+      position: relative;
+    }
+    .with-arrow::before {
+      content: '→';
+      position: absolute;
+      top: -20px;
+      left: 20%;
+      font-size: 60%;
+    }
+    .reveal i sup {
+      font-size: 60%;
+      position: absolute;
+      top: -22px;
+    }
+    .reveal i sub {
+      font-size: 60%;
+    }
+    section div.formula {
+      padding: 20px;
+      width: 600px;
+      border: 4px solid;
+      margin: 30px auto;
+    }
+    
+    section .aliasing-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    section img.aliasing-img {
+      width: 600px;
+      height: 260px;
+    }
+    
+    section .fxaa-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 100px;
+    }
+    section .fxaa-wrapper img.fxaa-img {
+      height: auto;
+      width: 49%;
+      border: none;
+    }
   </style>
 </head>
 
@@ -66,15 +188,7 @@
 
       <section>
         <h2>Khronos Group Members</h2>
-        <img class="img-members" src="img/members.jpeg">
-        <style>
-          section img.img-members {
-            max-height: 600px;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-          }
-        </style>
+        <img class="img-members" src="img/members.jpeg" alt="members">
       </section>
 
       <section>
@@ -87,32 +201,7 @@
             Видеокарта заточена на параллельное выполнение несвязанных между собой задач
           </li>
         </ul>
-        <img src="img/cpu-gpu.gif" class="cpu-gpu">
-        <style>
-          header.cpu-gpu-header {
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-          }
-          header.cpu-gpu-header h3 {
-            margin-left: 15px;
-            margin-right: 15px;
-          }
-          ul.cpu-gpu-list {
-            margin-top: 0;
-          }
-          ul.cpu-gpu-list li {
-            font-size: 32px;
-            margin-bottom: 15px;
-            line-height: 1.2;
-          }
-          section img.cpu-gpu {
-            margin-top: 20px;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-          }
-        </style>
+        <img src="img/cpu-gpu.gif" class="cpu-gpu" alt="cpu-gpu">
       </section>
 
       <section>
@@ -128,20 +217,7 @@
             Расскрашиваем треугольники
           </li>
         </ul>
-        <img class="steps" src="img/steps.png">
-        <style>
-          section img.steps {
-            margin-top: 80px;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-          }
-          ul.steps-list li {
-            font-size: 32px;
-            margin-bottom: 1px;
-            line-height: 1.2;
-          }
-        </style>
+        <img class="steps" src="img/steps.png" alt="steps">
       </section>
 
       <section>
@@ -161,7 +237,6 @@
               </li>
               <li>
                 gl.drawElements(...) и gl.drawArrays(...)
-              </li>
               </li>
             </ul>
           </li>
@@ -207,27 +282,12 @@
               Test and Blending
             </li>
         </ul>
-        <img src="img/pipeline.gif" class="pipeline-img all" style="min-height: 400px;">
-        <style>
-          section ul.pipeline-list {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 30px 10%;
-          }
-          section ul.pipeline-list li {
-            width: 50%;
-          }
-          section img.pipeline-img {
-            background-color: #ffffff;
-            border-color: #ffffff;
-            min-height: 500px;
-          }
-        </style>
+        <img src="img/pipeline.gif" class="pipeline-img all" alt="pipeline" style="min-height: 400px;">
       </section>
 
       <section>
         <h2>Vertex shader</h2>
-        <img src="img/pipeline-step2.gif" alt="" class="pipeline-img">
+        <img src="img/pipeline-step2.gif" alt="Vertex shader" class="pipeline-img">
       </section>
 
       <section>
@@ -265,9 +325,9 @@
       </section>
 
       <section>
-          <span><h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2></span>
-          <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
-        </section>
+        <h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2>
+        <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
+      </section>
   
       <section>
         <h2 style="text-transform: none;">gl_Position</h2>
@@ -276,17 +336,17 @@
             gl_Position - значение координат пространства отсечения
           </li>
         </ul>
-        <img src="img/ndc.png" width="475" style="max-height: 500px">
+        <img src="img/ndc.png" width="475" style="max-height: 500px" alt="ndc">
       </section>
 
       <section>
         <h2>Primitive Assembly</h2>
-        <img src="img/pipeline-step3.gif" alt="" class="pipeline-img">
+        <img src="img/pipeline-step3.gif" alt="Primitive Assembly" class="pipeline-img">
       </section>
 
       <section>
         <h2>Rasterizer</h2>
-        <img src="img/pipeline-step4.gif" alt="" class="pipeline-img">
+        <img src="img/pipeline-step4.gif" alt="Rasterizer" class="pipeline-img">
       </section>
 
       <section>
@@ -299,12 +359,12 @@
             Интерполяция данных вершин внутри треугольника
           </li>
         </ul>
-        <img src="img/rasterization.png">
+        <img src="img/rasterization.png" alt="rasterization">
       </section>
 
       <section>
         <h2>Fragment Shader</h2>
-        <img src="img/pipeline-step5.gif" alt="" class="pipeline-img">
+        <img src="img/pipeline-step5.gif" alt="Fragment Shader" class="pipeline-img">
       </section>
 
       <section>
@@ -352,7 +412,7 @@
 
       <section>
         <h2>Test and Blending + Output Buffer</h2>
-        <img src="img/pipeline-step6.gif" alt="" class="pipeline-img">
+        <img src="img/pipeline-step6.gif" alt="Test and Blending" class="pipeline-img">
       </section>
 
       <section>
@@ -389,19 +449,6 @@
       <section class="section-planer-view">
         <h2>WebGL 3D</h2>
         <img class="planet-view" src="img/planet.png" alt="3d-view">
-        <style>
-          section.section-planer-view.present {
-            top: -56% !important;
-            left: -500px;
-            width: auto;
-          }
-          section img.planet-view {
-            border: none;
-            max-height: 660px;
-            min-width: 1000px;
-            margin-bottom: auto;
-          } 
-        </style>
       </section>
 
       <section>
@@ -415,11 +462,6 @@
           </li>
         </ul>
         <img class="projection" src="img/projection.png" alt="projection">
-        <style>
-          section img.projection {
-            background-color: #ffffff;
-          }
-        </style>
       </section>
 
       <section>
@@ -449,19 +491,6 @@
           Planet
         </h2>
         <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
-        <style>
-          section.section-gif.present {
-            top: -56% !important;
-            left: -550px;
-            width: auto;
-          }
-          section img.image-gif {
-            border: none;
-            max-height: 700px;
-            min-width: 1100px;
-            margin-bottom: auto;
-          } 
-        </style>
       </section>
 
       <section>
@@ -479,7 +508,7 @@
 
       <section>
         <h2>Освещение по Фонгу</h2>
-        <img src="img/phong-sum.png" alt="">
+        <img src="img/phong-sum.png" alt="Phong">
         <div class="formula">
           <i style="position: relative">
           I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
@@ -487,37 +516,11 @@
           + k<sub>s</sub> (<span class="with-arrow">R</span> . <span class="with-arrow">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
           </i>
         </div>
-        <style>
-          .with-arrow {
-            position: relative;
-          }
-          .with-arrow::before {
-            content: '→';
-            position: absolute;
-            top: -20px;
-            left: 20%;
-            font-size: 60%;
-          }
-          .reveal i sup {
-            font-size: 60%;
-            position: absolute;
-            top: -22px;
-          }
-          .reveal i sub {
-            font-size: 60%;
-          }
-          section div.formula {
-            padding: 20px;
-            width: 600px;
-            border: 4px solid;
-            margin: 30px auto;
-          }
-        </style>
       </section>
 
       <section>
         <h2>Освещение</h2>
-        <img src="img/light.gif" alt="">
+        <img src="img/light.gif" alt="Light">
         <div class="formula">
           <i style="position: relative">
             I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
@@ -533,17 +536,6 @@
           <img class="aliasing-img" src="img/aliasing-1.png" alt="fxaa-before">
           <img class="aliasing-img" src="img/aliasing-2.png" alt="fxaa-after">
         </div>
-        <style>
-          section .aliasing-container {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          section img.aliasing-img {
-            width: 600px;
-            height: 260px;
-          }
-        </style>
       </section>
 
       <section>
@@ -555,19 +547,6 @@
         <div class="formula">
             L = 0,299 * R + 0,587 * G + 0,114 * B 
         </div>
-        <style>
-        section .fxaa-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-top: 100px;
-        }
-        section .fxaa-wrapper img.fxaa-img {
-          height: auto;
-          width: 49%;
-          border: none;
-        }
-        </style>
       </section>
 
       <section>
@@ -629,6 +608,13 @@
             <a href="https://github.com/volkova-annie">github.com/volkova-annie</a>
           </li>
         </ul>
+      </section>
+
+      <section class="section-gif">
+        <h2>
+          Planet
+        </h2>
+        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
       </section>
 
     </div>
