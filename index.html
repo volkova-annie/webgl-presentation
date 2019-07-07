@@ -214,10 +214,10 @@
             Говорим видеокарте, какие преобразования необходимо сделать над треугольниками
           </li>
           <li>
-            Расскрашиваем треугольники
+            Раскрашиваем треугольники
           </li>
         </ul>
-        <img class="steps" src="img/steps.png" alt="steps">
+        <img class="steps" src="img/steps.gif" alt="steps">
       </section>
 
       <section>
@@ -325,6 +325,22 @@
       </section>
 
       <section>
+        <h2>Нормаль</h2>
+        <ul>
+          <li>Нормаль - это единичный вектор, перпендикулярный поверхности в каждой данной её точке
+          </li>
+        </ul>
+        <img src="img/normal.png" alt="normal" class="normal">
+        <style>
+          section img.normal {
+            max-height: none;
+            width: 600px;
+            border: none;
+          }
+        </style>
+      </section>
+
+      <section>
         <h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2>
         <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
       </section>
@@ -417,7 +433,7 @@
 
       <section>
         <h2>Что у нас есть?</h2>
-        <ul>
+        <ul class="pipeline-list-2">
           <li>
             Shaders
           </li>
@@ -437,6 +453,21 @@
             Uniforms
           </li>
         </ul>
+        <img src="img/verticies.jpg" alt="pipelene">
+        <style>
+        section ul.pipeline-list-2 {
+          width: 919px;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-right: 0;
+          margin-left: 110px;
+        }
+
+        section ul.pipeline-list-2 li {
+          width: 35%;
+        }
+        </style>
       </section>
 
       <section class="section-gif">
@@ -465,13 +496,68 @@
       </section>
 
       <section>
-        <h2>Four Ways to Create a Mesh for a Sphere</h2>
-        <img src="img/spheres.png" alt="spheres" style="max-height: 500px">
+        <h2>3 Ways to Create a Mesh for a Sphere</h2>
+        <img src="img/spheres.png" alt="spheres" style="max-height: 500px;">
       </section>
+
+      <section>
+        <h2>UV sphere</h2>
+        <img src="img/uv-sphere.png" alt="uv-sphere" style="max-height: 500px;" class="sphere">
+        <style>
+          section img.sphere {
+            width: 900px;
+            border: none;
+          }
+        </style>
+      </section>
+
+      <section>
+        <h2>ICO sphere</h2>
+        <img src="img/ico-sphere.gif" alt="ico-sphere" style="max-height: 500px" class="sphere">
+      </section>
+
+      <section>
+          <h2>Normalized Cube</h2>
+          <img src="img/cubemap.jpg" alt="normalized cube" style="max-height: 500px;" class="sphere">
+          <style>
+            section img.uv-sphere {
+              width: 900px;
+              border: none;
+            }
+          </style>
+        </section>
 
       <section>
         <h2>Генерация карты высот</h2>
         <img src="img/noise-3d.png" alt="noise" style="max-height: 700px;width: 800px;">
+      </section>
+
+      <section>
+        <h2>Функция щума</h2>
+        <ul>
+          <li>0.0 - черный, 1.0 - белый</li>
+        </ul>
+        <img src="img/function-noise.png" alt="function-noise" style="border: none;">
+        <pre>
+          <code class="javascript">
+  for (int y = 0; y < высота; y ++) {
+    для (int x = 0; x < width; x ++) {      
+      double nx = x / ширина - 0,5, ny = y / высота - 0,5;
+      значение [y] [x] = шум (nx, ny);
+    }
+  } 
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h2>Приведение шума в соответствие с картой высот</h2>
+        <video src="videos/noise.mov" autoplay></video>
+        <pre>
+          <code class="javascript">
+    elevation[y][x] = noise(nx, ny);
+          </code>
+        </pre>
       </section>
 
       <section>
@@ -484,6 +570,11 @@
       + 0.25 * noise(4 * nx, 2 * ny);
           </code>
         </pre>
+      </section>
+
+      <section>
+        <h2>Изображение процедурного мира</h2>
+        <img src="img/biome.png" alt="biome">
       </section>
 
       <section class="section-gif">
