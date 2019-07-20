@@ -197,22 +197,21 @@
       </section>
 
       <section>
-        <h2>Что я расскажу?</h2>
-        <ul class="list-margin-bottom">
-            <li>Что такое WebGL</li>
-            <li>Немного основ из компьютерной графики</li>
-            <li>Как происходит отрисовка на видеокарте с помощью WebGL</li>
-            <li>Как рисовать 2d на WebGL</li>
-            <li>Как создать 3d планету на WebGL без использования библиотек и фреймворков</li>
-          </ul>
-      </section>
-
-      <section>
         <h2>Почему я решила рассказать про WebGL?</h2>
         <ul class="list-margin-bottom">
           <li>Узнать что-то новое про компьютерную графику</li>
           <li>WebGL - это отличный способ развлечь себя решением нестандартных для фронтендера задач в знакомой среде</li>
         </ul>
+      </section>
+
+      <section>
+        <h2>Что я расскажу?</h2>
+        <ul class="list-margin-bottom">
+            <li>Что такое WebGL?</li>
+            <li>Как WebGL работает?</li>
+            <li>Как рисовать 2d на WebGL</li>
+            <li>Как создать 3d планету на WebGL без использования библиотек и фреймворков</li>
+          </ul>
       </section>
 
       <section>
@@ -226,30 +225,72 @@
       </section>
 
       <section>
-        <h2>Где используется?</h2>
-        <ul class="list-margin-bottom" style="width: 100%;">
-          <li>Для работы с растровыми изображения (фильтры)</li>
-          <li>Для 3d рендеринга - игры, сцены и эффекты</li>
-          <li>Инетрактивная графика</li>
-        </ul>
-        <h3 style="margin-top: 30px;">Примеры использования WebGL:</h3>
-        <ul class="list-margin-bottom" style="width: 100%;">
-          <li><a href="https://playcanvas.com/features">Editor машины</a></li>
+        <h2>Где используется WebGL?</h2>
+      </section>
+
+      <section>
+        <h2>Для работы с растровыми изображениями</h2>
+        <img src="img/filter-webgl.gif" alt="filter">
+      </section>
+
+      <section>
+        <h2>Art + tech</h2>
+        <img src="img/art-webgl.jpg" alt="art">
+      </section>
+
+      <section>
+        <h2>Интерактивная графика<br/>(для музыки)</h2>
+        <img src="img/interactive-music.jpg" alt="interactive music">
+      </section>
+
+      <section>
+        <h2>3d design environments</h2>
+        <img src="img/3d-example.png" alt="3d example">
+      </section>
+
+      <section>
+        <h2>Создание 3d моделей</h2>
+        <img src="img/herz-webGL-verge3d.jpg" alt="3d модели">
+      </section>
+
+      <section>
+        <h2>Игры</h2>
+        <img src="img/game.jpg" alt="3d игры">
+      </section>
+
+      <section>
+        <h2>Интерактивные примеры</h2>
+        <ul class="list-margin-bottom" style="width: 100%; margin-top: 50px;">
+          <li><a href="https://playcanvas.com/features">Playcanvas Editor</a></li>
           <li>
-            <a href="https://bear71vr.nfb.ca/">Исследование заповедника с медведями</a>
+            <a href="http://www.adultswim.com/etcetera/choir/">Singing Lips</a>
           </li>
           <li>
-            <a href="http://www.adultswim.com/etcetera/choir/">Поющие губы</a>
-          </li>
-          <li>
-            <a href="http://oos.moxiecode.com/js_webgl/particles_morph/index.html">Молекулярная голова</a>
+            <a href="http://oos.moxiecode.com/js_webgl/particles_morph/index.html">Molecular head</a>
           </li>
         </ul>
       </section>
 
       <section>
         <h2>WebGl программы</h2>
-        JS программы + шейдеры на GLSL
+        <div class="container-flex">
+          <figure style="width: 30%;">
+            <img src="img/js-logo.png" alt="js">
+            <figcaption>JS программы</figcaption>
+          </figure>
+          <span style="align-self: center; font-size: 60px; flex-grow: 1;">+</span>
+          <figure style="width: 50%;">
+            <img src="img/webgl-logo.png" alt="webgl">
+            <figcaption>Шейдеры на GLSL</figcaption>
+          </figure>
+        </div>
+        <style>
+          .container-flex {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-around;
+          }
+        </style>
       </section>
 
       <section>
@@ -265,23 +306,59 @@
         <img src="img/cpu-gpu.gif" class="cpu-gpu" alt="cpu-gpu">
       </section>
 
-      <section>
-        <h2>Основные шаги</h2>
-        <ul class="steps-list">
+      <section class="client-server-container">
+        <h2>Клиент-серверная модель</h2>
+        <ul>
           <li>
-            Описание объекта - геометрия, состоящая из треугольников
+            JavaScript code - это клиент
           </li>
           <li>
-            Говорим видеокарте, какие преобразования необходимо сделать над треугольниками
+            Видеокарта - это сервер
           </li>
           <li>
-            Раскрашиваем треугольники
+            JavaScript code отправляет запросы на видеокарту через интерфейс WebGL
           </li>
         </ul>
-        <img class="steps" src="img/steps.gif" alt="steps">
+        <style>
+          section.client-server-container ul {
+            margin-top: 50px;
+          }
+          section.client-server-container li {
+            margin-bottom: 20px;
+          }
+        </style>
       </section>
 
       <section>
+        <h2>Как видеокарта рисует с помощью WebGL?</h2>
+      </section>
+
+      <section>
+        <h2>Описание объекта</h2>
+        <p> — геометрия, состоящая из треугольников и материалов, которые описывают, как эти треугольники нужно раскрасить</p>
+        <img src="img/dolphin-triangle-mesh.png" alt="dolphin">
+      </section>
+
+      <section>
+        <h2>Работа на видеокарте</h2>
+        <ul style="margin-top: 10px;">
+          <li style="margin-bottom: 15px;">
+            Преобразование позиций треугольников
+          </li>
+          <li style="margin-bottom: 15px;">
+            Проекция результирующей модели на экран
+          </li>
+          <li style="margin-bottom: 15px;">
+            В растеризаторе спроецированные треугольники разбиваются на фрагменты
+          </li>
+          <li style="margin-bottom: 15px;">
+            Определение цвета для каждого фрагмента во фрагментном шейдере
+          </li>
+        </ul>
+        <img src="img/process1.jpg" alt="pipelene">
+      </section>
+
+      <!-- <section>
         <h2>Клиент-серверная модель</h2>
         <ul>
           <li>
@@ -302,10 +379,38 @@
             </ul>
           </li>
         </ul>
+      </section> -->
 
-        <p style="margin-top: 10px;">Вершинный буффер</p>
-          <pre style="margin-top: 0;">
-            <code class="javascript" style="line-height: 1; padding: 0;">
+      <section>
+        <h2>Графический pipeline WebGL</h2>
+        <!-- <ul class="pipeline-list">
+          <li>Input Assembly</li>
+          <li>Vertex shader</li>
+          <li>Primitive Assembly</li>
+          <li>Rasterizer</li>
+          <li>Fragment Shader</li>
+          <li>Test and Blending</li>
+        </ul> -->
+        <img src="img/graphic-pipeline.png" class="pipeline-img all" alt="pipeline" style="margin-top: 40px;">
+      </section>
+
+      <section>
+        <h2>Input Assembler</h2>
+        <h3>(фиксированный этап)</h3>
+        <ul>
+          <li>
+            С помощью функции gl.bufferData(...) - мы переносим данные из javascript’a на видеркарту
+          </li>
+          <li style="margin-top: 10px;">Вершинный буффер:
+            <ul>
+              <li>Позиция</li>
+              <li>Нормаль</li>
+              <li>Текстурные координаты</li>
+            </ul>
+          </li>
+        </ul>
+        <pre style="margin-top: 0;">
+          <code class="javascript" style="line-height: 1; padding: 0;">
         const vertices = new Float32Array([
           // vertex 1
          -0.5, -0.5, 0.0,  // position   
@@ -318,36 +423,12 @@
           1.0, 0.5,       // texCoord
        ]);
           </code>
-          </pre>
-      </section>
-
-      <section>
-        <h2>Графический pipeline WebGL</h2>
-        <ul class="pipeline-list">
-            <li>
-              Input Assembly
-            </li>
-            <li>
-              Vertex shader
-            </li>
-            <li>
-              Primitive Assembly
-            </li>
-            <li>
-              Rasterizer
-            </li>
-            <li>
-              Fragment Shader
-            </li>
-            <li>
-              Test and Blending
-            </li>
-        </ul>
-        <img src="img/pipeline.gif" class="pipeline-img all" alt="pipeline" style="min-height: 400px;">
+        </pre>
       </section>
 
       <section>
         <h2>Vertex shader</h2>
+        <h3>(програмируемый этап)</h3>
         <img src="img/pipeline-step2.gif" alt="Vertex shader" class="pipeline-img">
       </section>
 
@@ -356,10 +437,8 @@
         <div style="display: flex;">
           <ul>
             <li>
-              Получаем данные, которые описывают вершину через атрибуты
-            </li>
-            <li>
-              На выходе вершинный шейдер возвращает позицию вершины в gl_Position
+              Получаем данные, которые описывают вершину через атрибуты:
+              <ul><li>позиция, нормаль, текстурные координаты</li></ul>
             </li>
           </ul>
         </div>
@@ -386,39 +465,55 @@
       </section>
 
       <section>
-        <h2>Нормаль</h2>
-        <ul>
-          <li>Нормаль - это единичный вектор, перпендикулярный поверхности в каждой данной её точке
+        <h2>Преобразования над данными</h2>
+        <ul style="margin-top: 30px;">
+          <li style="margin-bottom: 20px;">
+            Матрица перевода вершин из пространства модели в мировое пространство
+          </li>
+          <li style="margin-bottom: 20px;">
+            Матрица перевода из мирового пространства в пространство камеры
+          </li>
+          <li style="margin-bottom: 20px;">
+            Матрица перевода из пространства камеры в пространство отсечения
           </li>
         </ul>
-        <img src="img/normal.png" alt="normal" class="normal">
-        <style>
-          section img.normal {
-            max-height: none;
-            width: 600px;
-            border: none;
-          }
-        </style>
       </section>
-
+      
       <section>
-        <h2>Пространство камеры</h2> <h3>vs</h3> <h2>Пространство отсечения</h2>
-        <img src="img/clip-space.png" alt="clip-space" width="700" style="border: #ffffff;">
+        <h2>Пространство камеры</h2> <h3>vs</h3> <h2>пространство отсечения</h2>
+        <img src="img/clip-space.png" alt="clip-space" style="border: #ffffff;" width="700">
       </section>
   
       <section>
         <h2 style="text-transform: none;">gl_Position</h2>
         <ul>
+           <li>
+              На выходе вершинный шейдер возвращает позицию вершины в gl_Position
+           </li>
           <li>
-            gl_Position - значение координат пространства отсечения
+            gl_Position — значение координат пространства отсечения
           </li>
         </ul>
-        <img src="img/ndc.png" width="475" style="max-height: 500px" alt="ndc">
+        <img src="img/ndc.png" width="370" style="max-height: 500px" alt="ndc">
       </section>
 
       <section>
         <h2>Primitive Assembly</h2>
         <img src="img/pipeline-step3.gif" alt="Primitive Assembly" class="pipeline-img">
+      </section>
+
+      <section>
+        <h2>Primitive Assembly</h2>
+        <h3>(фиксированный этап)</h3>
+          <ul style="margin-top: 20px;">
+            <li style="margin-bottom: 10px;">Cобирает из вершин примитивы</li>
+            <li>WebGL - поддерживает три типа примитивов:
+              <ul>
+                <li>точки, линии, треугольники</li>
+              </ul>
+            </li>
+          </ul>
+          <img src="img/primitive-assembly.png" width="550" alt="primitive-assembly">
       </section>
 
       <section>
@@ -428,6 +523,7 @@
 
       <section>
         <h2>Rasterizer</h2>
+        <h3>(фиксированный этап)</h3>
         <ul>
           <li>
             Видеокарта определяет, какие пиксели в итоговом Frame buffer перекрываются рисуемым примитивом
@@ -445,15 +541,14 @@
       </section>
 
       <section>
-        <h2>
-          Fragment Shader
-        </h2>
+        <h2>Fragment Shader</h2>
+        <h3>(програмируемый этап)</h3>
         <ul>
           <li>
             Для каждого фрагмента, полученного из Rasterizer мы выполняем один Fragment shader
           </li>
           <li>
-            На выходе Fragment shader дает цвет итогового фрагмента
+            На выходе Fragment shader дает цвет итогового фрагмента - gl_FragColor
           </li>
         </ul>
         <pre>
@@ -471,7 +566,7 @@
           </code>
         </pre>
       </section>
-
+<!-- 
       <section>
         <h2>Uniforms</h2>
         <ul>
@@ -485,16 +580,17 @@
             В них могут храниться положение света, положение камеры, время и т.д.
           </li>
         </ul>
-      </section>
+      </section> -->
 
       <section>
         <h2>Test and Blending + Output Buffer</h2>
-        <img src="img/pipeline-step6.gif" alt="Test and Blending" class="pipeline-img">
+        <!-- <img src="img/pipeline-step6.gif" alt="Test and Blending" class="pipeline-img"> -->
+        <img src="img/test-blending.png" alt="Test and Blending" class="pipeline-img">
       </section>
 
       <section>
-        <h2>Что у нас есть?</h2>
-        <ul class="pipeline-list-2">
+        <h2>Итого по графическому pipeline</h2>
+        <!-- <ul class="pipeline-list-2">
           <li>
             Shaders
           </li>
@@ -513,7 +609,7 @@
           <li>
             Uniforms
           </li>
-        </ul>
+        </!--> 
         <img src="img/verticies.jpg" alt="pipelene">
         <style>
         section ul.pipeline-list-2 {
@@ -587,6 +683,23 @@
             }
           </style>
         </section>
+
+
+      <!-- <section>
+        <h2>Нормаль</h2>
+        <ul>
+          <li>Нормаль - это единичный вектор, перпендикулярный поверхности в каждой данной её точке
+          </li>
+        </ul>
+        <img src="img/normal.png" alt="normal" class="normal">
+        <style>
+          section img.normal {
+            max-height: none;
+            width: 600px;
+            border: none;
+          }
+        </style> 
+      </section>-->
 
       <section>
         <h2>Генерация карты высот</h2>
@@ -748,18 +861,58 @@
       </section>
 
       <section>
-        <h2>Спасибо :)</h2>
-        <div class="credits">
-          <a href="http://qrcoder.ru" target="_blank"><img src="http://qrcoder.ru/code/?https%3A%2F%2Fvolkova-annie.github.io%2Fwebgl-presentation%2F&6&0" width="246" height="246" border="0" title="QR код"></a>
+        <h2>Спасибо</h2>
+        <div class="thanks">
+          <a class="qr" href="http://qrcoder.ru" target="_blank"><img src="http://qrcoder.ru/code/?https%3A%2F%2Fvolkova-annie.github.io%2Fwebgl-presentation%2F&6&0" width="350" height="350" border="0" title="QR код"></a>
+          <div class="links" >
+            <a href="https://tlgg.ru/@volkova_annie">
+              <img src="img/telegram.svg" alt="telegram" width="40" height="40">
+              @volkova_annie
+            </a>
+            <a href="https://github.com/volkova-annie">
+              <img src="img/github.svg" alt="github" width="40" height="40">
+              github.com/volkova-annie
+            </a>
+          </div>
         </div>
-        <ul style="margin-top: 30px;">
-          <li>
-            <a href="https://tlgg.ru/@volkova_annie">telegram: @volkova_annie</a>
-          </li>
-          <li>
-            <a href="https://github.com/volkova-annie">github.com/volkova-annie</a>
-          </li>
-        </ul>
+        <style>
+        section .thanks {
+          display: flex;
+        }
+
+        section .thanks .qr {
+          flex-grow: 1
+        }
+
+        section .thanks .links {
+          margin-top: 30px;
+          display: flex;
+          flex-direction: column;
+          width: 50%;
+        }
+
+        section .links a {
+          display: flex;
+          align-items: center;
+        }
+
+        section .links img {
+          margin-right: 15px; 
+          border: none;
+          box-shadow: none;
+          background: none;
+        }
+
+        section .links img {
+          width: 41px;
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        section .links img[alt="github"] {
+          background-color: #ffffff;
+        }
+        </style>
       </section>
 
       <section class="section-gif">
