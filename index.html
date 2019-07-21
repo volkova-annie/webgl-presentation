@@ -230,12 +230,12 @@
 
       <section>
         <h2>Для работы с растровыми изображениями</h2>
-        <img src="img/filter-webgl.gif" alt="filter">
+        <img src="img/filter-webgl.gif" alt="filter" style="max-height: 500px;">
       </section>
 
       <section>
         <h2>Art + tech</h2>
-        <img src="img/art-webgl.jpg" alt="art">
+        <img src="img/art-webgl.jpg" alt="art" >
       </section>
 
       <section>
@@ -245,12 +245,12 @@
 
       <section>
         <h2>3d design environments</h2>
-        <img src="img/3d-example.png" alt="3d example">
+        <img src="img/3d-example.jpg" alt="3d example" style="max-height: 550px;">
       </section>
 
       <section>
         <h2>Создание 3d моделей</h2>
-        <img src="img/herz-webGL-verge3d.jpg" alt="3d модели">
+        <img src="img/herz-webGL-verge3d.jpg" alt="3d модели" style="max-height: 500px;">
       </section>
 
       <section>
@@ -289,6 +289,16 @@
             display: flex;
             align-items: baseline;
             justify-content: space-around;
+          }
+
+          .container-flex img[alt="js"] {
+            background: none;
+            border: none;
+            box-shadow: none;
+          }
+          .container-flex img[alt="webgl"] {
+            background-color: white;
+            border-radius: 50px;
           }
         </style>
       </section>
@@ -589,7 +599,7 @@
       </section>
 
       <section>
-        <h2>Итого по графическому pipeline</h2>
+        <h2>Подводим итоги</h2>
         <!-- <ul class="pipeline-list-2">
           <li>
             Shaders
@@ -625,6 +635,26 @@
           width: 35%;
         }
         </style>
+      </section>
+
+      <!-- <section class="section-gif">
+        <h2>
+            WebGL 2d
+        </h2>
+      </section> -->
+
+      <section>
+        <h2>
+            WebGL 2d
+        </h2>
+        <img src="img/canvas.png" alt="canvas" style="border: none;width: 100%; margin-top: 40px;">
+        <!-- <pre>
+          <code class="c">
+  < canvas id="c" width="1024" height="512" >< / canvas >
+
+  document.getElementById("c").getContext("webgl");
+          </code>
+        </pre> -->
       </section>
 
       <section class="section-gif">
