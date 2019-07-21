@@ -179,13 +179,13 @@
             box-shadow: none;" class="cover" src="img/planet-main.png" alt="Planet">
         </figure>
         <p>Простой 3d рендер на WebGL без фреймворков</p>
-        <!-- <p>Brought to you by <a href="https://github.com/volkova-annie">Volkova Annie</a></p> -->
       </section>
 
       <section class="about">
         <h2>Oбо мне</h2>
         <!-- <img src="" alt=""> -->
         <ul class="list-margin-bottom">
+          <li>Волкова Анна</li>
           <li>Фронтенд-разработчик 2 года</li>
           <li>В Альфа-банке в команде AlfaCall</li>
         </ul>
@@ -261,12 +261,17 @@
       <section>
         <h2>Интерактивные примеры</h2>
         <ul class="list-margin-bottom" style="width: 100%; margin-top: 50px;">
-          <li><a href="https://playcanvas.com/features">Playcanvas Editor</a></li>
+          <li>
+            <a href="https://playcanvas.com/features">Playcanvas Editor</a>
+          </li>
           <li>
             <a href="http://www.adultswim.com/etcetera/choir/">Singing Lips</a>
           </li>
           <li>
             <a href="http://oos.moxiecode.com/js_webgl/particles_morph/index.html">Molecular head</a>
+          </li>
+          <li>
+            <a href="https://www.shadertoy.com/view/lt2Gzt">Shadertoy</a>
           </li>
         </ul>
       </section>
@@ -278,27 +283,36 @@
             <img src="img/js-logo.png" alt="js">
             <figcaption>JS программы</figcaption>
           </figure>
-          <span style="align-self: center; font-size: 60px; flex-grow: 1;">+</span>
+          <span>+</span>
           <figure style="width: 50%;">
             <img src="img/webgl-logo.png" alt="webgl">
             <figcaption>Шейдеры на GLSL</figcaption>
           </figure>
         </div>
         <style>
-          .container-flex {
+          section .container-flex {
             display: flex;
             align-items: baseline;
             justify-content: space-around;
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 40px;
           }
 
-          .container-flex img[alt="js"] {
-            background: none;
-            border: none;
-            box-shadow: none;
+          .container-flex figcaption {
+            color: #000000;
           }
-          .container-flex img[alt="webgl"] {
-            background-color: white;
-            border-radius: 50px;
+
+          .container-flex span {
+            align-self: center;
+            flex-grow: 1;
+            color: #000000;
+            font-size: 60px;
+          }
+
+          section .container-flex img {
+            box-shadow: none;
+            border: none;
           }
         </style>
       </section>
@@ -365,7 +379,7 @@
             Определение цвета для каждого фрагмента во фрагментном шейдере
           </li>
         </ul>
-        <img src="img/process1.jpg" alt="pipelene">
+        <img src="img/process1.png" alt="pipelene">
       </section>
 
       <!-- <section>
@@ -478,13 +492,13 @@
         <h2>Преобразования над данными</h2>
         <ul style="margin-top: 30px;">
           <li style="margin-bottom: 20px;">
-            Матрица перевода вершин из пространства модели в мировое пространство
+            Матрица трансформации вершин из пространства модели в мировое пространство
           </li>
           <li style="margin-bottom: 20px;">
-            Матрица перевода из мирового пространства в пространство камеры
+            Матрица трансформации из мирового пространства в пространство камеры
           </li>
           <li style="margin-bottom: 20px;">
-            Матрица перевода из пространства камеры в пространство отсечения
+            Матрица трансформации из пространства камеры в пространство отсечения
           </li>
         </ul>
       </section>
@@ -737,19 +751,18 @@
       </section>
 
       <section>
-        <h2>Функция щума</h2>
+        <h2>Функция шума</h2>
         <ul>
           <li>0.0 - черный, 1.0 - белый</li>
         </ul>
         <img src="img/function-noise.png" alt="function-noise" style="border: none;">
         <pre>
           <code class="javascript">
-  for (int y = 0; y < высота; y ++) {
-    для (int x = 0; x < width; x ++) {      
-      double nx = x / ширина - 0,5, ny = y / высота - 0,5;
-      значение [y] [x] = шум (nx, ny);
-    }
-  } 
+      // функция noise возвращает случайное число
+      float noise (in vec2 st) {
+        return fract(sin(dot(st.xy,
+          vec2(12.9898,78.233))) * 43758.5453123);
+      } 
           </code>
         </pre>
       </section>
@@ -765,7 +778,7 @@
       </section>
 
       <section>
-        <h2>Noise</h2>
+        <h2>3 Октавы шума</h2>
         <img src="img/noise.jpg" alt="noise">
         <pre>
           <code>
