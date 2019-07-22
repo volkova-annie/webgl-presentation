@@ -101,12 +101,12 @@
       max-height: 660px;
       min-width: 1000px;
       margin-bottom: auto;
-    } 
+    }
 
     section img.projection {
       background-color: #ffffff;
     }
-    
+
     section.section-gif.present {
       top: -56% !important;
       left: -550px;
@@ -117,8 +117,8 @@
       max-height: 700px;
       min-width: 1100px;
       margin-bottom: auto;
-    } 
-    
+    }
+
     .with-arrow {
       position: relative;
     }
@@ -143,7 +143,7 @@
       border: 4px solid;
       margin: 30px auto;
     }
-    
+
     section .aliasing-container {
       display: flex;
       align-items: center;
@@ -153,7 +153,7 @@
       width: 600px;
       height: 260px;
     }
-    
+
     section .fxaa-wrapper {
       display: flex;
       align-items: center;
@@ -199,7 +199,7 @@
       <section>
         <h2>Почему я решила рассказать про WebGL?</h2>
         <ul class="list-margin-bottom">
-          <li>Узнать что-то новое про компьютерную графику</li>
+          <li>Возможность узнать что-то новое про компьютерную графику</li>
           <li>WebGL - это отличный способ развлечь себя решением нестандартных для фронтендера задач в знакомой среде</li>
         </ul>
       </section>
@@ -437,9 +437,9 @@
           <code class="javascript" style="line-height: 1; padding: 0;">
         const vertices = new Float32Array([
           // vertex 1
-         -0.5, -0.5, 0.0,  // position   
+         -0.5, -0.5, 0.0,  // position
           1.0, 0.0, 0.0,   // normal
-          0.5, 0.5,        // texCoord 
+          0.5, 0.5,        // texCoord
           ...
           // vertex n
           1.0, 0.5, 0.0,  // position
@@ -476,11 +476,11 @@
       uniform mat4 u_viewProjection;
       // output to fragment shader
       varying vec3 v_normal;
-  
+
       void main() {
         vec4 worldPos = u_worldTransform * vec4(a_position, 1.0);
         vec4 viewPos = u_viewProjection * worldPos;
-  
+
         v_normal = mat3(u_worldTransform) * a_normal;
         gl_Position = viewPos;
       }
@@ -502,12 +502,12 @@
           </li>
         </ul>
       </section>
-      
+
       <section>
         <h2>Пространство камеры</h2> <h3>vs</h3> <h2>пространство отсечения</h2>
         <img src="img/clip-space.png" alt="clip-space" style="border: #ffffff;" width="700">
       </section>
-  
+
       <section>
         <h2 style="text-transform: none;">gl_Position</h2>
         <ul>
@@ -582,7 +582,7 @@
       uniform vec3 u_lightColor;
       //input from vertex shader
       varying vec3 v_normal;
-      
+
       void main() {
         float NoL = max(dot(v_normal, -u_lightDir), 0.0);
         gl_FragColor = vec4(NoL * u_lightColor, 1.0);
@@ -590,7 +590,7 @@
           </code>
         </pre>
       </section>
-<!-- 
+<!--
       <section>
         <h2>Uniforms</h2>
         <ul>
@@ -633,7 +633,7 @@
           <li>
             Uniforms
           </li>
-        </!--> 
+        </!-->
         <img src="img/verticies.jpg" alt="pipelene">
         <style>
         section ul.pipeline-list-2 {
@@ -651,24 +651,11 @@
         </style>
       </section>
 
-      <!-- <section class="section-gif">
-        <h2>
-            WebGL 2d
-        </h2>
-      </section> -->
-
       <section>
         <h2>
             WebGL 2d
         </h2>
         <img src="img/canvas.png" alt="canvas" style="border: none;width: 100%; margin-top: 40px;">
-        <!-- <pre>
-          <code class="c">
-  < canvas id="c" width="1024" height="512" >< / canvas >
-
-  document.getElementById("c").getContext("webgl");
-          </code>
-        </pre> -->
       </section>
 
       <section class="section-gif">
@@ -742,7 +729,7 @@
             width: 600px;
             border: none;
           }
-        </style> 
+        </style>
       </section>-->
 
       <section>
@@ -762,19 +749,22 @@
       float noise (in vec2 st) {
         return fract(sin(dot(st.xy,
           vec2(12.9898,78.233))) * 43758.5453123);
-      } 
+      }
           </code>
         </pre>
       </section>
 
       <section>
         <h2>Приведение шума в соответствие с картой высот</h2>
-        <video src="videos/noise.mov" autoplay></video>
+        <video src="videos/noise.mov" autoplay="true" id="noise-video"></video>
         <pre>
           <code class="javascript">
     elevation[y][x] = noise(nx, ny);
           </code>
         </pre>
+        <script>
+          document.getElementById('noise-video').play();
+        </script>
       </section>
 
       <section>
@@ -794,6 +784,19 @@
         <img src="img/biome.png" alt="biome">
       </section>
 
+      <section>
+        <h2>AlphaBlend для облаков</h2>
+        <pre>
+            <code class="javascript"  style="line-height: 1.5;">
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+        blendResult = shaderOutput.rgb * shaderOutput.a +
+                      frameBuffer.rgb * (1 - shaderOutput.a);
+            </code>
+        </pre>
+      </section>
+
       <section class="section-gif">
         <h2>
           Planet
@@ -802,25 +805,12 @@
       </section>
 
       <section>
-        <h2>AlphaBlend для облаков</h2>
-        <pre>
-            <code class="javascript"  style="line-height: 1.5;">
-        gl.enable(gl.BLEND);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-        
-        blendResult = shaderOutput.rgb * shaderOutput.a +
-                      frameBuffer.rgb * (1 - shaderOutput.a);
-            </code>
-        </pre>
-      </section>
-
-      <section>
         <h2>Освещение по Фонгу</h2>
         <img src="img/phong-sum.png" alt="Phong">
         <div class="formula">
           <i style="position: relative">
-          I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
-          +  k<sub>d</sub> (<span class="with-arrow">L</span> . <span class="with-arrow">N</span>) i<sub>d</sub> 
+          I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub>
+          +  k<sub>d</sub> (<span class="with-arrow">L</span> . <span class="with-arrow">N</span>) i<sub>d</sub>
           + k<sub>s</sub> (<span class="with-arrow">R</span> . <span class="with-arrow">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
           </i>
         </div>
@@ -831,8 +821,8 @@
         <img src="img/light.gif" alt="Light">
         <div class="formula">
           <i style="position: relative">
-            I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub> 
-            +  k<sub>d</sub> (<span class="with-arrow" style="color: #8E37D3">L</span> . <span class="with-arrow" style="color: #FF0000;">N</span>) i<sub>d</sub> 
+            I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub>
+            +  k<sub>d</sub> (<span class="with-arrow" style="color: #8E37D3">L</span> . <span class="with-arrow" style="color: #FF0000;">N</span>) i<sub>d</sub>
             + k<sub>s</sub> (<span class="with-arrow" style="color: #2765DD;">R</span> . <span class="with-arrow" style="color: #24B24C;">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
           </i>
         </div>
@@ -853,7 +843,7 @@
           <img class="fxaa-img" src="img/fxaa1.png" alt="fxaa-after">
         </div>
         <div class="formula">
-            L = 0,299 * R + 0,587 * G + 0,114 * B 
+            L = 0,299 * R + 0,587 * G + 0,114 * B
         </div>
       </section>
 
@@ -940,7 +930,7 @@
         }
 
         section .links img {
-          margin-right: 15px; 
+          margin-right: 15px;
           border: none;
           box-shadow: none;
           background: none;
