@@ -509,6 +509,19 @@
       </section>
 
       <section>
+        <h2>Проекция</h2>
+        <ul>
+          <li>
+            Ортогональная - линии проецирования переносятся перпендикулярно плоскости проекции
+          </li>
+          <li>
+            Перспективная - луч проекции идет от проецируемой точки в позицию камеры
+          </li>
+        </ul>
+        <img class="projection" src="img/projection.png" alt="projection">
+      </section>
+
+      <section>
         <h2 style="text-transform: none;">gl_Position</h2>
         <ul>
            <li>
@@ -671,19 +684,6 @@
       </section>
 
       <section>
-        <h2>Проекция</h2>
-        <ul>
-          <li>
-            Ортогональная - линии проецирования переносятся перпендикулярно плоскости проекции
-          </li>
-          <li>
-            Перспективная - луч проекции идет от проецируемой точки в позицию камеры
-          </li>
-        </ul>
-        <img class="projection" src="img/projection.png" alt="projection">
-      </section>
-
-      <section>
         <h2>3 Ways to Create a Mesh for a Sphere</h2>
         <img src="img/spheres.png" alt="spheres" style="max-height: 500px;">
       </section>
@@ -705,18 +705,17 @@
       </section>
 
       <section>
-          <h2>Normalized Cube</h2>
-          <img src="img/cubemap.jpg" alt="normalized cube" style="max-height: 500px;" class="sphere">
-          <style>
-            section img.uv-sphere {
-              width: 900px;
-              border: none;
-            }
-          </style>
-        </section>
+        <h2>Normalized Cube</h2>
+        <img src="img/cubemap.jpg" alt="normalized cube" style="max-height: 500px;" class="sphere">
+        <style>
+          section img.uv-sphere {
+            width: 900px;
+            border: none;
+          }
+        </style>
+      </section>
 
-
-      <!-- <section>
+      <section>
         <h2>Нормаль</h2>
         <ul>
           <li>Нормаль - это единичный вектор, перпендикулярный поверхности в каждой данной её точке
@@ -730,7 +729,12 @@
             border: none;
           }
         </style>
-      </section>-->
+      </section>
+
+      <section>
+        <h2>Sphere Normalized Cube</h2>
+        <video src="videos/normalized-cube.mov" autoplay="true"></video>
+      </section>
 
       <section>
         <h2>Генерация карты высот</h2>
@@ -805,15 +809,24 @@
       </section>
 
       <section>
+        <h2>Чтобы сделать 3д модель объёмной, ее необходимо осветить</h2>
+        <img src="img/sphere-earth-light.jpg" alt="light of earth">
+      </section>
+
+      <section>
         <h2>Освещение по Фонгу</h2>
         <img src="img/phong-sum.png" alt="Phong">
-        <div class="formula">
-          <i style="position: relative">
-          I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub>
-          +  k<sub>d</sub> (<span class="with-arrow">L</span> . <span class="with-arrow">N</span>) i<sub>d</sub>
-          + k<sub>s</sub> (<span class="with-arrow">R</span> . <span class="with-arrow">V</span>)<sup>α</sup>&nbsp;&nbsp;i<sub>s</sub>
-          </i>
-        </div>
+        <ul>
+          <li>
+            Фоновое освещение — имитация света, достигшего заданной точки после отражения от других объектов.
+          </li>
+          <li>
+            Рассеянное освещение — свет от источника, рассеянный после попадания в заданную точку. В зависимости от угла, под которым падает свет, освещение становится сильнее или слабее. 
+          </li>
+          <li>
+            Отраженное освещение — свет от источника, отраженный после попадания в заданную точку. Отраженный свет виден, если он попадает в камеру.
+          </li>
+        </ul>
       </section>
 
       <section>
