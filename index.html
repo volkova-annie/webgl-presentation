@@ -183,15 +183,21 @@
 
       <section class="about">
         <h2>Oбо мне</h2>
-        <!-- <img src="" alt=""> -->
-        <ul class="list-margin-bottom">
-          <li>Волкова Анна</li>
-          <li>Фронтенд-разработчик 2 года</li>
-          <li>В Альфа-банке в команде AlfaCall</li>
-        </ul>
+        <div style="display: flex; justify-content: space-between;">
+          <img src="img/me.png" alt="my photo" style="border: none;"/>
+          <ul class="list-margin-bottom">
+            <li>Волкова Анна</li>
+            <li>Фронтенд-разработчик 2 года</li>
+            <li>В Альфа-банке в команде AlfaCall</li>
+          </ul>
+        </div>
+        
         <style>
+          section .list-margin-bottom {
+            margin-top: 20px;
+          }
           section .list-margin-bottom li {
-            margin-bottom: 15px;
+            margin-top: 15px;
           }
         </style>
       </section>
@@ -230,32 +236,32 @@
 
       <section>
         <h2>Для работы с растровыми изображениями</h2>
-        <img src="img/filter-webgl.gif" alt="filter" style="max-height: 500px;">
+        <img src="img/filter-webgl.gif" alt="filter" style="border: none; max-height: 500px;">
       </section>
 
       <section>
         <h2>Art + tech</h2>
-        <img src="img/art-webgl.jpg" alt="art" >
+        <img src="img/art-webgl.jpg" alt="art" style="border: none; max-height: 500px;">
       </section>
 
       <section>
         <h2>Интерактивная графика<br/>(для музыки)</h2>
-        <img src="img/interactive-music.jpg" alt="interactive music">
+        <img src="img/interactive-music.jpg" alt="interactive music" style="border: none; max-height: 500px;">
       </section>
 
       <section>
         <h2>3d design environments</h2>
-        <img src="img/3d-example.jpg" alt="3d example" style="max-height: 550px;">
+        <img src="img/3d-example.jpg" alt="3d example" style="max-height: 550px; border: none;">
       </section>
 
       <section>
         <h2>Создание 3d моделей</h2>
-        <img src="img/herz-webGL-verge3d.jpg" alt="3d модели" style="max-height: 500px;">
+        <img src="img/herz-webGL-verge3d.jpg" alt="3d модели" style="max-height: 500px; border: none;">
       </section>
 
       <section>
         <h2>Игры</h2>
-        <img src="img/game.jpg" alt="3d игры">
+        <img src="img/game.jpg" alt="3d игры" style="border: none; max-height: 500px;">
       </section>
 
       <section>
@@ -738,7 +744,7 @@
 
       <section>
         <h2>Sphere Normalized Cube</h2>
-        <img src="videos/normalized-cube.gif" style="border: none;"/>
+        <img src="videos/normalized-cube.gif" style="border: none; max-height: 500px;"/>
       </section>
 
       <section>
@@ -765,7 +771,7 @@
 
       <section>
         <h2>Приведение шума в соответствие с картой высот</h2>
-        <video src="videos/noise.mov" autoplay="true" id="noise-video"></video>
+        <img src="videos/noise.gif" style="border: none;"/>
         <pre>
           <code class="javascript">
     elevation[y][x] = noise(nx, ny);
@@ -814,8 +820,8 @@
       </section>
 
       <section>
-        <h2>Чтобы сделать 3д модель объёмной, ее необходимо осветить</h2>
-        <img src="img/sphere-earth-light.jpg" alt="light of earth">
+        <h2>Чтобы сделать 3d модель объёмной, ее необходимо осветить</h2>
+        <img src="img/sphere-earth-light.jpg" alt="light of earth" style="border: none; max-height: 500px;"/>
       </section>
 
       <section>
