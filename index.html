@@ -240,24 +240,28 @@
       </section>
 
       <section>
-        <h2>Art + tech</h2>
-        <img src="img/art-webgl.jpg" alt="art" style="border: none; max-height: 500px;">
+          <iframe src="https://dogstudio.co/" width="1200" height="700">Dog studio</iframe>
       </section>
 
       <section>
-        <h2>Интерактивная графика<br/>(для музыки)</h2>
-        <img src="img/interactive-music.jpg" alt="interactive music" style="border: none; max-height: 500px;">
-      </section>
-
-      <section>
-        <h2>Интерактивныя презентация машин и интерьеров</h2>
+        <h2>Интерактивная презентация машин и интерьеров</h2>
         <img src="img/3d-example.png" alt="3d example" style="max-height: 500px; border: none;">
       </section>
 
       <section>
+          <h2>Интерактивная графика<br/>(для проигрывателей музыки)</h2>
+          <img src="img/interactive-music.jpg" alt="interactive music" style="border: none; max-height: 500px;">
+        </section>
+
+      <section>
+          <h2>Art + tech</h2>
+          <img src="img/art-webgl.jpg" alt="art" style="border: none; max-height: 500px;">
+        </section>
+  
+      <!-- <section>
         <h2>Создание 3d моделей</h2>
         <img src="img/herz-webGL-verge3d.jpg" alt="3d модели" style="max-height: 500px; border: none;">
-      </section>
+      </section> -->
 
       <section>
         <h2>Игры</h2>
@@ -836,11 +840,11 @@
       <section>
         <h2>Освещение по Фонгу</h2>
         <img src="img/phong-sum.png" alt="Phong">
-        <ul>
-          <li>
+        <ul style="font-size: 28px;">
+          <li style="margin-bottom: 20px;">
             Фоновое освещение (ambient) — имитация света, достигшего заданной точки после отражения от других объектов.
           </li>
-          <li>
+          <li style="margin-bottom: 20px;">
             Рассеянное освещение (diffuse) — свет от источника, рассеянный после попадания в заданную точку. В зависимости от угла, под которым падает свет, освещение становится сильнее или слабее. 
           </li>
           <li>
@@ -851,7 +855,7 @@
 
       <section>
         <h2>Освещение</h2>
-        <img src="img/light.gif" alt="Light">
+        <img src="img/light.png" alt="Light">
         <div class="formula">
           <i style="position: relative">
             I<sub>p</sub> = k<sub>α</sub> i<sub>α</sub>
@@ -875,9 +879,16 @@
           <img class="fxaa-img" src="img/fxaa2.png" alt="fxaa-before">
           <img class="fxaa-img" src="img/fxaa1.png" alt="fxaa-after">
         </div>
-        <div class="formula">
-            L = 0,299 * R + 0,587 * G + 0,114 * B
+        <div class="formula" style="width: 700px;">
+            L = 0.2126 * R + 0.7152 * G + 0.0722 * B
         </div>
+      </section>
+
+      <section class="section-gif">
+        <h2>
+          Planet
+        </h2>
+        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
       </section>
 
       <section>
@@ -982,13 +993,6 @@
           background-color: #ffffff;
         }
         </style>
-      </section>
-
-      <section class="section-gif">
-        <h2>
-          Planet
-        </h2>
-        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
       </section>
 
     </div>
