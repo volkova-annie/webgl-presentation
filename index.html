@@ -336,19 +336,6 @@
         </style>
       </section>
 
-      <section>
-        <header class="cpu-gpu-header"><h2>CPU</h2><h3>vs</h3><h2>GPU</h2></header>
-        <ul class="cpu-gpu-list">
-          <li>
-            Процессор Core i7, 2,7ГГц - 4 ядра, видеокарта Radeon Pro 450 - 640 ядер
-          </li>
-          <li>
-            Видеокарта заточена на параллельное выполнение несвязанных между собой задач
-          </li>
-        </ul>
-        <img src="img/cpu-gpu.gif" class="cpu-gpu" alt="cpu-gpu">
-      </section>
-
       <section class="client-server-container">
         <h2>Клиент-серверная модель</h2>
         <ul>
@@ -370,6 +357,19 @@
             margin-bottom: 20px;
           }
         </style>
+      </section>
+
+      <section>
+        <header class="cpu-gpu-header"><h2>CPU</h2><h3>vs</h3><h2>GPU</h2></header>
+        <ul class="cpu-gpu-list">
+          <li>
+            Процессор Core i7, 2,7ГГц - 4 ядра, видеокарта Radeon Pro 450 - 640 ядер
+          </li>
+          <li>
+            Видеокарта заточена на параллельное выполнение несвязанных между собой задач
+          </li>
+        </ul>
+        <img src="img/cpu-gpu.gif" class="cpu-gpu" alt="cpu-gpu">
       </section>
 
       <section>
@@ -509,21 +509,19 @@
 
       <section>
         <h2>Преобразования над данными</h2>
-        <ul style="margin-top: 30px;">
+        <ul style="margin-top: 10px;">
           <li style="margin-bottom: 20px;">
             Матрица трансформации вершин из пространства модели в мировое пространство
           </li>
-          <li style="margin-bottom: 20px;">
+          <li style="margin-bottom: 10px;">
             Матрица трансформации из мирового пространства в пространство камеры
           </li>
-          <li style="margin-bottom: 20px;">
-            Матрица трансформации из пространства камеры в пространство отсечения
-          </li>
         </ul>
+        <img src="img/all-steps.png" alt="all-steps" style="background: #ffffff;">
       </section>
 
       <section>
-        <h2>Пространство камеры</h2> <h3>vs</h3> <h2>пространство отсечения</h2>
+        <h2>Матрица трансформации из пространства камеры в пространство отсечения</h2>
         <img src="img/clip-space.png" alt="clip-space" style="border: #ffffff;" width="700">
       </section>
 
@@ -699,7 +697,8 @@
 
       <section class="section-planer-view">
         <h2>WebGL 3D</h2>
-        <img class="planet-view" src="img/planet.png" alt="3d-view">
+        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
+        <!-- <img class="planet-view" src="img/planet.png" alt="3d-view"> -->
       </section>
 
       <section>
@@ -735,11 +734,6 @@
       </section>
 
       <section>
-        <h2>Перобразование куба в сферу</h2>
-        <img src="img/cubemap-vertex.jpg" alt="normalized cube" style="border: none; max-height: 500px;">
-      </section>
-
-      <section>
         <h2>Нормаль</h2>
         <ul>
           <li>Нормаль - это единичный вектор, перпендикулярный поверхности в каждой данной её точке
@@ -753,6 +747,11 @@
             border: none;
           }
         </style>
+      </section>
+
+      <section>
+        <h2>Перобразование куба в сферу</h2>
+        <img src="img/cubemap-vertex.jpg" alt="normalized cube" style="border: none; max-height: 500px;">
       </section>
 
 <!--      <section>-->
@@ -812,6 +811,13 @@
         <img src="img/biome.png" alt="biome">
       </section>
 
+      <section class="section-gif">
+        <h2>
+          Planet
+        </h2>
+        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
+      </section>
+
       <section>
         <h2>AlphaBlend для облаков</h2>
         <pre>
@@ -823,13 +829,6 @@
                       frameBuffer.rgb * (1 - shaderOutput.a);
             </code>
         </pre>
-      </section>
-
-      <section class="section-gif">
-        <h2>
-          Planet
-        </h2>
-        <img src="videos/planet0.gif" class="image-gif" alt="planet-gif">
       </section>
 
       <section>
@@ -868,8 +867,8 @@
       <section>
         <h2>Aliasing</h2>
         <div class="aliasing-container">
-          <img class="aliasing-img" src="img/aliasing-1.png" alt="fxaa-before">
-          <img class="aliasing-img" src="img/aliasing-2.png" alt="fxaa-after">
+          <img class="aliasing-img" src="img/aliasing2.png" alt="fxaa-before">
+          <img class="aliasing-img" src="img/aliasing1.png" alt="fxaa-after">
         </div>
       </section>
 
