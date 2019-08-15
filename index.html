@@ -681,11 +681,48 @@
         </style>
       </section>
 
-      <section>
+      <section class="section-gif">
         <h2>
             WebGL 2d
         </h2>
+        <img src="videos/2d.gif" class="image-gif" alt="2d-gif">
+      </section>
+
+      <section>
+        <h2>
+            WebGL Context
+        </h2>
         <img src="img/canvas.png" alt="canvas" style="border: none;width: 100%; margin-top: 40px;">
+      </section>
+
+      <section>
+        <h2>Quad</h2>
+        <img src="img/quad.png" alt="quad" style="border: none; min-height: 500px;">
+      </section>
+
+      <section>
+        <h2>
+          Shader Program
+        </h2>
+        <pre>
+          <code class="javascript" style="line-height: 1.2;">
+      // компилируем вершинный шейдер
+      const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vertexShader, vertexShaderCode);
+      gl.compileShader(vertexShader); 
+  
+      // компилируем фрагментный шейдер
+      const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fragmentShader, fragmentShaderCode);
+      gl.compileShader(fragmentShader); 
+  
+      // линкуем их вместе
+      const program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+          </code>
+        </pre>
       </section>
 
       <section class="section-gif">
