@@ -191,7 +191,7 @@
         <div style="display: flex; justify-content: space-between;">
           <img src="img/me.png" alt="my photo" style="border: none;"/>
           <ul class="list-margin-bottom">
-            <li>Волкова Анна</li>
+            <li>Анна Волкова</li>
             <li>Фронтенд-разработчик 2 года</li>
             <li>В Альфа-банке в команде AlfaCall</li>
           </ul>
@@ -687,11 +687,48 @@
         </style>
       </section>
 
-      <section>
+      <section class="section-gif">
         <h2>
             WebGL 2d
         </h2>
+        <img src="videos/2d.gif" class="image-gif" alt="2d-gif">
+      </section>
+
+      <section>
+        <h2>
+            WebGL Context
+        </h2>
         <img src="img/canvas.png" alt="canvas" style="border: none;width: 100%; margin-top: 40px;">
+      </section>
+
+      <section>
+        <h2>Quad</h2>
+        <img src="img/quad.png" alt="quad" style="border: none; min-height: 500px;">
+      </section>
+
+      <section>
+        <h2>
+          Shader Program
+        </h2>
+        <pre>
+          <code class="javascript" style="line-height: 1.2;">
+      // компилируем вершинный шейдер
+      const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+      gl.shaderSource(vertexShader, vertexShaderCode);
+      gl.compileShader(vertexShader); 
+  
+      // компилируем фрагментный шейдер
+      const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+      gl.shaderSource(fragmentShader, fragmentShaderCode);
+      gl.compileShader(fragmentShader); 
+  
+      // линкуем их вместе
+      const program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+          </code>
+        </pre>
       </section>
 
       <section class="section-gif">
@@ -878,6 +915,11 @@
           <img class="aliasing-img" src="img/aliasing2.png" alt="fxaa-before">
           <img class="aliasing-img" src="img/aliasing1.png" alt="fxaa-after">
         </div>
+      </section>
+
+      <section>
+        <h2>Зубчатый паттерн после растеризации</h2>
+        <img src="img/rasterization.png" alt="rasterization">
       </section>
 
       <section>
